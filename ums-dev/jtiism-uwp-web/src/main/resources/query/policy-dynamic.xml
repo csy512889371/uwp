@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <sql-query name="policy.queryList">
+        <![CDATA[
+	FROM SHJT_POLICY  WHERE 1=1
+		<#--  政策类别单选   -->
+		<#if plcy001?? && plcy001!="">
+			and plcy001 in(
+			<#list plcy001?split(",") as plcy001s>
+				'${plcy001s}'<#if plcy001s_has_next>,</#if>
+			</#list>)
+		</#if>
+		<#--  政策类别多选   -->
+		<#if plcyType?? && plcyType!="">
+			and plcy001 in(
+		<#list plcyType?split(",") as plcyTypes>
+			'${plcyTypes}'<#if plcyTypes_has_next>,</#if>
+		</#list>)
+		</#if>
+		<#--  政策标题   -->
+		<#if plcy002?? && plcy002!="">
+			and (plcy002 like '%${plcy002}%' or plcy002 like '%${plcy002}%')
+		</#if>
+		<#--  发布来源   -->
+		<#if plcy008?? && plcy008!="">
+			and (plcy008 = '${plcy008}')
+		</#if>
+		<#--  状态   -->
+		<#if plcy006?? && plcy006!="">
+			and (plcy006 = '${plcy006}')
+		</#if>
+	]]>
+    </sql-query>
+</dynamic-hibernate-statement>

@@ -1,0 +1,25 @@
+@charset "utf-8";
+/*初始化样式*/
+html,body{ height:100%;}
+html,body,ul,ol,li,h1, h2, h3, h4, h5, h6,form,blockquote,dl,dt,dd,table,tr,th,td,center,input,button,textarea,img{ margin:0; padding:0;}
+body {font:14px/22px 'Microsoft YaHei',Arial,Helvetica; color:#333; text-align:center; overflow:hidden;}
+ul,ol,li{list-style:none;}
+h1, h2, h3, h4, h5, h6,font{font-size:100%;}
+
+a{text-decoration:none; color:#333; cursor:pointer;}
+a:hover{ color:#2898fd;}
+a em,a b,a span{ cursor:pointer;}
+img{ border:0;}
+a:hover img,a:hover em{filter:alpha(opacity:86); opacity:.86;}
+
+em,i{transition:all 0.2s ease-in-out; overflow:hidden;}
+
+.cle_aft:after{ content:""; height:0; visibility:hidden; display:block; clear:both;}
+.cle_aft{ zoom:1;}
+.cle{clear:both; display:block; height:1px; overflow:hidden; line-height:1px;}
+.lef{float:left; display:inline-block;}
+.rig{float:right; display:inline-block;}
+
+
+input,select,button{font:16px/22px  'Microsoft YaHei',Arial,Helvetica; color:#333;  vertical-align:middle;}
+input:focus,select:focus,button:focus{ color:#333;}

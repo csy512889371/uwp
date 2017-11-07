@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <sql-query name="repInd.getRepIndList">
+        <![CDATA[
+            SELECT
+            IFNULL(ind.REPIND000,'-') REPIND000,
+            IFNULL(ind.REPIND001,'-') REPIND001,
+            IFNULL(ZD112.CODE_NAME ,'-') REPIND002,
+            IFNULL(ind.REPIND003,'-') REPIND003,
+            IFNULL(ind.REPIND004,'-') REPIND004,
+            IFNULL(ind.REPIND005,'-') REPIND005,
+            IFNULL(ind.REPIND006,'-') REPIND006,
+            IFNULL(ind.REPIND007,'-') REPIND007,
+            IFNULL(ind.REPIND008,'-') REPIND008,
+            IFNULL(ind.REPIND009,'-') REPIND009,
+            IFNULL(ind.REPIND010,'-') REPIND010,
+            IFNULL(ind.REPIND011,'-') REPIND011
+            FROM
+            ZD112 ZD112
+            LEFT OUTER JOIN
+            SHJT_REP_IND ind
+            ON ZD112.CODE_NAME = ind.REPIND002
+            <#if year?? && year!="">
+            AND REPIND001 = '${year}'
+            </#if> AND ind.REPIND001 is not null
+        ]]>
+    </sql-query>
+
+
+    <sql-query name="repInd.delRepIndReport">
+        <![CDATA[
+            DELETE FROM SHJT_REP_IND;
+            ]]>
+    </sql-query>
+
+
+    <sql-query name="repInd.genRepIndReport">
+        <![CDATA[
+            INSERT INTO SHJT_REP_IND   (
+                REPIND000,
+                REPIND001,
+                REPIND002,
+                REPIND003,
+                REPIND004,
+                REPIND005,
+                REPIND006,
+                REPIND007,
+                REPIND008,
+                REPIND009,
+                REPIND010
+            )
+             SELECT
+                UUID() REPIND000,AA.*
+                FROM (
+                SELECT
+                DATE_FORMAT(ENTAOS001,"%Y")   REPIND001,
+                CODE_NAME REPIND002 ,
+                IFNULL(SUM(AOS.ENTAOS004) ,0) REPIND003,
+                IFNULL(SUM(AOS.ENTAOS005) ,0) REPIND004,
+                IFNULL(SUM(AOS.ENTAOS006) ,0) REPIND005,
+                IFNULL(SUM(AOS.ENTAOS007) ,0) REPIND006,
+                IFNULL(SUM(AOS.ENTAOS017) ,0) REPIND007,
+                IFNULL(SUM(AOS.ENTAOS018) ,0) REPIND008,
+                IFNULL(SUM(AOS.ENTAOS019) ,0) REPIND009,
+                COUNT(1) REPIND010
+            FROM
+            ZD112 ZD112
+            JOIN SHJT_ENT_INF ENTINF ON CONCAT(",", ENTINF.ENTINF012, ",")  LIKE   CONCAT('%,',CODE,',%')
+            LEFT JOIN SHJT_ENT_AOS AOS ON AOS.ENTINF000 = ENTINF.ENTINF000
+            GROUP BY REPIND001,REPIND002
+            ) AA
+            ]]>
+    </sql-query>
+</dynamic-hibernate-statement>

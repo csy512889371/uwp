@@ -1,0 +1,55 @@
+<!DOCTYPE dyna-html-hibernate-statement PUBLIC
+		"-//Haier/Html Template DTD 1.0//EN"
+		"http://www.jtiism.com/dtd/dyna-html-hibernate-statement-1.0.dtd">
+
+<dyna-html-hibernate-statement>
+
+	<html-tmplate name="dynaInfoset.singeImage">
+	<![CDATA[
+		<tr>
+			<td width="25%" id="entImage_${propertyName}" colspan="2">
+				<label id="tpbPic">
+					<img class="entUplaodImg" id="picture_${propertyName}" src="${picStr}" data-original="${originPicStr}" onclick="originPic(0)">
+				</label>
+			</td>
+			<td>
+				<input type="button" value="上传图片" class="btn-style1" style="margin-top: 150%;" onclick="imgUpload('${colId}','${propertyName}','${infoSet}','${infoName}')">
+			</td>
+		</tr>
+	]]>
+	</html-tmplate>
+
+
+	<html-tmplate name="dynaInfoset.multiFile">
+		<![CDATA[
+			<tr>
+				<td colspan="4" rowspn="2">
+				<div class="layui-inline">
+					<label class="layui-form-label" >附件上传</label>
+					<div class="layui-input-block">
+						<div id="picker" ></div>
+					</div>
+				</div>
+				<div class="layui-inline" >
+					<label class="layui-form-label" style="height: 0px;padding-bottom: 1px"></label>
+					<div id="divFileProgressContainer" class="txwrp" style="width: 500px">
+						<span id="infoSpan" border="0" width="530" style="line-height:0px;display: inline;1px #7FAAFF; padding: 2px;margin-top:8px;"></span>
+					</div>
+				</div>
+				<input id="${propertyName}" type="hidden" name="${propertyName}" value="${multiFile}" />
+				<input id="uploadFileStr" type="hidden" name="uploadFileStr">
+				<input id="deleteFileStr" type="hidden" name="deleteFileStr">
+				</td>
+			</tr>
+
+		]]>
+	</html-tmplate>
+
+
+	<html-tmplate name="dynaInfoset.xxxxx">
+		<![CDATA[
+			<td style="width:27%;" colspan="" rowspan="" onclick=""><label class="radio inline"><input type="radio" name="ENTPLI006" value="1">国有</label><label class="radio inline"><input type="radio" name="ENTPLI006" value="0">集体</label></td>
+		]]>
+	</html-tmplate>
+
+</dyna-html-hibernate-statement>

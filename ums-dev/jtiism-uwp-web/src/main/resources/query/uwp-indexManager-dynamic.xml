@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+"http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+	<!-- 提醒 -->
+	<sql-query name="uwp-indexManager.CreateIndexCode">
+	<![CDATA[
+		CREATE TABLE `${tableName}` (
+		  `DmGrp` varchar(20) DEFAULT NULL,
+		  `DmLevCod` varchar(12) DEFAULT NULL,
+		  `YesPrv` tinyint(4) DEFAULT NULL,
+		  `Attribute` int(11) DEFAULT NULL,
+		  `CODE` varchar(8) DEFAULT NULL,
+		  `CODE_NAME` varchar(80) DEFAULT NULL,
+		  `CODE_ABR1` varchar(60) DEFAULT NULL,
+		  `CODE_ABR2` varchar(60) DEFAULT NULL,
+		  `CODE_ANAME` varchar(100) DEFAULT NULL,
+		  `CODE_SPELLING` varchar(100) DEFAULT NULL,
+		  `INVALID` varchar(2) DEFAULT NULL,
+		  `ININO` double DEFAULT NULL,
+		  `CODE_LEVEL` double DEFAULT NULL,
+		  `CODE_LEAF` varchar(1) DEFAULT NULL,
+		  `SUP_CODE` varchar(8) DEFAULT NULL,
+		  `CODE_ASSIST` varchar(10) DEFAULT NULL,
+		  `CODE_BSPELLING` varchar(50) DEFAULT NULL,
+		  `START_DATE` varchar(8) DEFAULT NULL,
+		  `STOP_DATE` varchar(8) DEFAULT NULL,
+		  `ISCUSTOM` char(1) DEFAULT NULL,
+		  `IS_COMMON` tinyint(4) DEFAULT NULL,
+		  `IS_STAND` tinyint(4) DEFAULT NULL
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	]]>
+	</sql-query>
+
+	
+	
+</dynamic-hibernate-statement>

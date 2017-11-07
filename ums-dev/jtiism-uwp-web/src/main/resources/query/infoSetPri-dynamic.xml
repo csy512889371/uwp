@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <sql-query name="infoSetPri.getInfosetPriByUserId">
+        <![CDATA[
+		select max(infoset_pri.priv) as PRIV from CFG_UMS_ROLE_USER role_user INNER JOIN
+		ROLE_INFOSET_PRI infoset_pri on role_user.ROLEID = infoset_pri.ROLE_ID
+		where role_user.USERID = :userId and infoset_pri.PRIV_CODE = :privKey
+	]]>
+    </sql-query>
+
+    <sql-query name="infoSetPri.getInfosetPriByRoleId">
+        <![CDATA[
+		select max(infoset_pri.priv) as PRIV from
+		ROLE_INFOSET_PRI infoset_pri 
+		where infoset_pri.ROLE_ID = :roleId and infoset_pri.PRIV_CODE = :privKey
+	]]>
+    </sql-query>
+
+
+    <!--根据用户企业ID获取信息集权限-->
+    <sql-query name="infoSetPri.getInfosetPriByUserIdAndEntId">
+        <![CDATA[
+            select max(roelInfoSet.PRIV) as PRIV from CFG_UMS_ROLE_USER  roleUser
+            INNER JOIN ROLE_INFOSET_PRI roelInfoSet on roelInfoSet.ROLE_ID = roleUser.ROLEID
+            INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+            INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+            INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.entInf023 = UNITINFO.b00
+            WHERE ENFINF.ENTINF000 = :entId and roelInfoSet.INFO_TYPE = '0' and roelInfoSet.PRIV_CODE = :privKey and roleUser.USERID = :userId
+	]]>
+    </sql-query>
+    <!--根据角色ID获取信息集权限-->
+    <sql-query name="infoSetPri.getInfosetPriByRoleIdAndEntId">
+        <![CDATA[
+            select max(roelInfoSet.PRIV) as PRIV from CFG_UMS_ROLE_USER  roleUser
+            INNER JOIN ROLE_INFOSET_PRI roelInfoSet on roelInfoSet.ROLE_ID = roleUser.ROLEID
+            INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+            INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+            INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.entInf023 = UNITINFO.b00
+            WHERE ENFINF.ENTINF000 = :entId and roelInfoSet.INFO_TYPE = '0' and roelInfoSet.PRIV_CODE = :privKey and roleUser.ROLEID =:roleId
+    ]]>
+    </sql-query>
+    <!--根据用户企业ID获取信息集权限集合-->
+    <sql-query name="infoSetPri.getInfosetPriListByUserIdAndEntId">
+        <![CDATA[
+        select max(roelInfoSet.PRIV) as PRIV  , ENFINF.ENTINF000  ,roelInfoSet.PRIV_CODE
+        from CFG_UMS_ROLE_USER  roleUser
+        INNER JOIN ROLE_INFOSET_PRI roelInfoSet on roelInfoSet.ROLE_ID = roleUser.ROLEID
+        INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.entInf023 = UNITINFO.b00
+        WHERE roelInfoSet.INFO_TYPE = '0' and roleUser.USERID = :userId and ENFINF.ENTINF000 = :entId
+        group by ENFINF.ENTINF000,roelInfoSet.PRIV_CODE
+        ]]>
+    </sql-query>
+    <!--根据角色ID获取信息集权限集合-->
+    <sql-query name="infoSetPri.getInfosetPriListByRoleIdAndEntId">
+        select max(roelInfoSet.PRIV) as PRIV  , ENFINF.ENTINF000  ,roelInfoSet.PRIV_CODE
+        from CFG_UMS_ROLE_USER  roleUser
+        INNER JOIN ROLE_INFOSET_PRI roelInfoSet on roelInfoSet.ROLE_ID = roleUser.ROLEID
+        INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.entInf023 = UNITINFO.b00
+        WHERE roelInfoSet.INFO_TYPE = '0' roleUser.ROLE_ID = :roleId  and ENFINF.ENTINF000 = :entId
+        group by ENFINF.ENTINF000,roelInfoSet.PRIV_CODE
+    </sql-query>
+</dynamic-hibernate-statement>

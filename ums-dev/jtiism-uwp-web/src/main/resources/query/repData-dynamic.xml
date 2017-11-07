@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+    <!--根据类型统计企业个数-->
+    <sql-query name="repData.genRepDataReport">
+        <![CDATA[
+            INSERT INTO  SHJT_REP_DATA (
+                REPDATA000,
+                REPDATA001,
+                REPDATA002,
+                REPDATA003,
+                REPDATA004,
+                REPDATA005,
+                REPDATA006,
+                REPDATA007,
+                REPDATA008,
+                REPDATA009,
+                REPDATA010,
+                REPDATA011,
+                REPDATA012,
+                REPDATA013,
+                REPDATA014)
+            VALUES(
+            UUID(),
+            '${REPDATA001}',
+            '${REPDATA002}',
+            '${REPDATA003}',
+            '${REPDATA004}',
+            '${REPDATA005}',
+            '${REPDATA006}',
+            '${REPDATA007}',
+            '${REPDATA008}',
+            '${REPDATA009}',
+            '${REPDATA010}',
+            '${REPDATA011}',
+            '${REPDATA012}',
+            '${REPDATA013}',
+            '${REPDATA014}'
+            )
+        ]]>
+        </sql-query>
+
+        <sql-query name="repData.delRepDataReport">
+        <![CDATA[
+         DELETE FROM SHJT_REP_DATA;
+        ]]>
+        </sql-query>
+
+
+
+    <sql-query name="repData.getRepDataResult">
+        <![CDATA[
+            SELECT
+                REPDATA000,
+                REPDATA001,
+                REPDATA002,
+                REPDATA003,
+                REPDATA004,
+                REPDATA005,
+                REPDATA006,
+                REPDATA007,
+                REPDATA008,
+                REPDATA009,
+                REPDATA010,
+                REPDATA011,
+                REPDATA012,
+                REPDATA013,
+                REPDATA014
+            FROM SHJT_REP_DATA
+            WHERE 1=1
+        ]]>
+    </sql-query>
+
+
+    <sql-query name="repData.getYosResult">
+        <![CDATA[
+            SELECT
+            REPYOS008,REPYOS001,
+            sum(REPYOS009) REPDATA007,
+            avg(REPYOS005) REPDATA008,
+            sum(REPYOS011) REPDATA009,
+            avg(REPYOS003) REPDATA010,
+            sum(REPYOS010) REPDATA011,
+            avg(REPYOS007) REPDATA012
+            FROM
+            SHJT_REP_YOS WHERE
+            DATE_FORMAT(REPYOS008,'%Y') = IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,DATE_FORMAT(NOW(),'%Y')-1,DATE_FORMAT(NOW(),'%Y'))
+            AND
+            REPYOS001 =  IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,4,ceil(DATE_FORMAT(now(),'%m')/12/0.25)-1)
+            group by REPYOS008,REPYOS001  ORDER BY REPYOS008 desc ,REPYOS001  desc  LIMIT 1
+        ]]>
+    </sql-query>
+
+
+
+            <!--根据类型统计企业个数-->
+    <sql-query name="repData.getCondictionByType">
+    <![CDATA[
+            <#-- 总数-->
+            <#if type ==1 >
+            AND entInf050 = 0
+            </#if>
+            <#--新入驻-->
+            <#if type ==2 >
+            AND entInf050 = 0 AND entInf049 =1
+            </#if>
+            <#--迁出-->
+            <#if type ==3 >
+            AND entInf050 = 0 AND entInf049 =2
+            </#if>
+           <#--收入超过2000（万）-->
+            <#if type ==4 >
+            AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+            DATE_FORMAT(yos.ENTYOS002,'%Y') = IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,DATE_FORMAT(NOW(),'%Y')-1,DATE_FORMAT(NOW(),'%Y'))
+            AND
+            yos.ENTYOS003 =  IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,4,ceil(DATE_FORMAT(now(),'%m')/12/0.25))
+            AND
+            yos.ENTYOS004 >=2000 AND yos.ENTINF000 =ent.ENTINF000
+
+            )
+            </#if>
+           <#--收入超过200-2000（万）-->
+            <#if type ==5 >
+            AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+              DATE_FORMAT(yos.ENTYOS002,'%Y') = IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,DATE_FORMAT(NOW(),'%Y')-1,DATE_FORMAT(NOW(),'%Y'))
+            AND
+            yos.ENTYOS003 =  IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,4,ceil(DATE_FORMAT(now(),'%m')/12/0.25))
+            AND
+            yos.ENTYOS004 >=200 AND  yos.ENTYOS004 <=2000 AND  yos.ENTINF000 =ent.ENTINF000 )
+            </#if>
+            <#--收入超过100-2000（万）-->
+            <#if type ==6 >
+            AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+              DATE_FORMAT(yos.ENTYOS002,'%Y') = IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,DATE_FORMAT(NOW(),'%Y')-1,DATE_FORMAT(NOW(),'%Y'))
+            AND
+            yos.ENTYOS003 =  IF(ceil(DATE_FORMAT(now(),'%m')/12/0.25)=1,4,ceil(DATE_FORMAT(now(),'%m')/12/0.25))
+            AND
+            yos.ENTYOS004 >=100 AND  yos.ENTYOS004 <=2000 AND  yos.ENTINF000 =ent.ENTINF000 )
+            </#if>
+            <#--商贸型-->
+            <#if type ==7 >
+            AND entInf050 = 0 AND entInf026 =2
+            </#if>
+            <#--实体型-->
+            <#if type ==8 >
+            AND entInf050 = 0 AND entInf026 =1
+            </#if>
+            ]]>
+    </sql-query>
+
+
+
+        </dynamic-hibernate-statement>

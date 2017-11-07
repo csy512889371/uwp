@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<methods>
+		<!-- 赋值方法 -->
+		<column name="setObject" package="rongji.report.methods." entity="FunctionBasic" func="setObject" />
+		<column name="setPicture" package="rongji.report.methods." entity="FunctionBasic" func="setPicture" />
+		<column name="fillEach" package="rongji.report.methods." entity="FunctionBasic" func="fillEach" />
+		<column name="fill" package="rongji.report.methods." entity="FunctionBasic" func="fill" />
+		<!-- 基本方法 -->
+		<column name="cache" package="rongji.report.methods." entity="FunctionBasic" func="cache" />
+		<column name="data" package="rongji.report.methods." entity="FunctionBasic" func="getDataSet" />
+		<column name="get" package="rongji.report.methods." entity="FunctionBasic" func="get" />
+		<column name="getParam" package="rongji.report.methods." entity="FunctionBasic" func="getParam" />
+		<column name="setCell" package="rongji.report.methods." entity="FunctionBasic" func="setCell" />
+		<column name="getCurDate" package="rongji.report.methods." entity="FunctionBasic" func="getCurDate" />
+		<column name="getDateBeforeYear" package="rongji.report.methods." entity="FunctionBasic" func="getDateBeforeYear" />
+		<column name="ageToBirthdate" package="rongji.report.methods." entity="FunctionBasic" func="ageToBirthdate" />
+		<column name="count" package="rongji.report.methods." entity="FunctionBasic" func="count" />
+		<column name="avgAge" package="rongji.report.methods." entity="FunctionBasic" func="avgAge" />
+		<column name="buildInQuery" package="rongji.report.methods." entity="FunctionBasic" func="buildInQuery" />
+		
+
+
+		<column name="copyARowWithStartTempRow" package="rongji.report.methods." entity="FunctionBasic" func="copyARowWithStartTempRow"/>
+		<column name="copyRowsAndAddShiftLine" package="rongji.report.methods." entity="FunctionBasic" func="copyRowsAndAddShiftLine"/>
+		<column name="setSheetName" package="rongji.report.methods." entity="FunctionBasic" func="setSheetName" />
+		<column name="setFileName" package="rongji.report.methods." entity="FunctionBasic" func="setFileName" />
+		<column name="autoFit" package="rongji.report.methods." entity="FunctionBasic" func="autoFit" />
+		<column name="autoResumeFit" package="rongji.report.methods." entity="FunctionBasic" func="autoResumeFit" />
+		<column name="autoFitEach" package="rongji.report.methods." entity="FunctionBasic" func="autoFitEach" />
+		<column name="autoHeight"  package="rongji.report.methods." entity="FunctionBasic" func="autoHeight" />
+
+
+		<column name="dateFormate" package="rongji.report.methods." entity="FunctionBasic" func="dateFormate" />
+		<column name="index" package="rongji.report.methods." entity="FunctionBasic" func="index" />
+		<column name="sql" package="rongji.report.methods." entity="FunctionBasic" func="sql" />
+		<column name="separator" package="rongji.report.methods." entity="FunctionBasic" func="separator" />
+		<column name="yesOrno" package="rongji.report.methods." entity="FunctionBasic" func="yesOrno" />
+		
+		
+		<!-- 扩展方法 -->
+		<column name="codeName" entity="EnterpriseReportFunction" func="codeName" />
+		<column name="codeAbr" entity="EnterpriseReportFunction" func="codeAbr" />
+		<column name="age" entity="EnterpriseReportFunction" func="age" />
+		<column name="picture" entity="EnterpriseReportFunction" func="picture" />
+		<column name="placeOfOrigin" entity="EnterpriseReportFunction" func="placeOfOrigin" />
+		<column name="placeOfBirth" entity="EnterpriseReportFunction" func="placeOfBirth" />
+		<column name="partyTime" entity="EnterpriseReportFunction" func="partyTime" />
+		<column name="techPosition" entity="EnterpriseReportFunction" func="techPosition" />
+		<column name="heighestTechPosition" entity="EnterpriseReportFunction" func="heighestTechPosition" />
+		<column name="fullEduAndDegree" entity="EnterpriseReportFunction" func="fullEduAndDegree" />
+		<column name="workEduAndDegree" entity="EnterpriseReportFunction" func="workEduAndDegree" />
+		
+		
+		<column name="reward" entity="EnterpriseReportFunction" func="reward" />
+		<column name="annual" entity="EnterpriseReportFunction" func="annual" />
+		<column name="resume" entity="EnterpriseReportFunction" func="resume" />
+		<column name="unitAndDuty" entity="EnterpriseReportFunction" func="unitAndDuty" />
+		
+		<column name="dutyLevel" entity="EnterpriseReportFunction" func="dutyLevel" /><!-- 无 -->
+		
+		<column name="dutyLevelTime"  entity="EnterpriseReportFunction" func="dutyLevelTime" />
+		<column name="mainDutyTime"  entity="EnterpriseReportFunction" func="mainDutyTime" />
+		<column name="dutyTimeInMuster"  entity="EnterpriseReportFunction" func="dutyTimeInMuster" />
+		<column name="dutyLevelInMuster"  entity="EnterpriseReportFunction" func="dutyLevelInMuster" />
+		<column name="eduAndDegreeOnRoster" entity="EnterpriseReportFunction" func="eduAndDegreeOnRoster" />
+		<column name="queryUnitTree" entity="EnterpriseReportFunction" func="queryUnitTree" />
+	</methods>
+	<params>
+		<param name="packagePath" value="rongji.shjt.service.report.methods." />
+	</params>
+</config>

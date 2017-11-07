@@ -1,0 +1,131 @@
+/*@charset "utf-8";*/
+
+label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	color: red;
+	font-style: italic
+}
+input.error{
+	  border-color:red !important;
+}
+input.unFix{
+	  border-color:red !important;
+}
+
+
+
+/*控制左侧菜单下拉效果*/
+.ztree1 * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+.ztree1 li ul{ margin:0; padding:0}
+.ztree1 li {line-height:30px;padding: 0px;margin-bottom: 2px}
+.ztree1 li a {width:100%;height:30px;padding: 0px;}
+.ztree1 li a:hover {text-decoration:none; background-color: rgb(232,242,254);cursor:default;}
+.ztree1 li a span.button.switch {visibility:hidden}
+.ztree1.showIcon li a span.button.switch {visibility:visible}
+.ztree1 li a.curSelectedNode {background-color:#2898fd;border:0;height:30px;color:#fff;}
+.ztree1 li span {line-height:30px;}
+.ztree1 li span.button {/* margin-top: -7px; */}
+.ztree1 li span.button.switch {width: 0px;height: 16px;}
+.ztree1 li a.level0{/* background-color: #00bbbb; *//*border-top: solid 1px #e5e5e5; border: solid 1px #e5e5e5;*/height:30px;}
+.ztree1 li a.level0:hover{cursor:default;}
+.ztree1 li a.level0 span {font-size: 110%;font-weight: bold;padding-left: 5px;}
+.ztree1 li a.level1 span {padding-left: 13px;}
+.ztree1 li span.button {background-image:url(""); *background-image:url("")}
+/* .ztree1 li span.button.switch.level0 {width: 20px; height:20px}
+.ztree1 li span.button.switch.level1 {width: 20px; height:20px} */
+.ztree1 li span.button.noline_open {background-position: 0 0;}
+
+.selector{background-color: #e8f2fe;}
+.selector1{background-color: #f9f8fe;}
+.table_div{width:96%;margin: auto;}
+.btn_div{text-align: right;width: 98%;}
+.oper_menu{/* height:30px; */}
+.left_btn{float: left;}
+.right_btn{float: right;}
+
+/* .bck{background-color: #eff5fa;} */
+.bck{background-color: #f5f5f5;}
+.bck1{background-color: #e6f0ff;}
+
+.menu_two img{width:18px;}
+
+
+
+
+
+/*
+ * 附件文件图标
+ * 视频文件统一用 i-file-video, 音频文件统一用 i-file-audio, 其他未知用 i-file
+ */
+.i-file,.i-file-video,.i-file-audio,.i-file-image,.i-file-xls,.i-file-xlsx,.i-file-doc,.i-file-docx,.i-file-odt,.i-file-rtf,.i-file-ppt,.i-file-pptx,.i-file-7z,
+.i-file-rar,.i-file-zip,.i-file-htm,.i-file-html,.i-file-js,.i-file-css,.i-file-xml,.i-file-pdf,.i-file-psd,.i-file-swf,.i-file-txt,.i-file-dir,
+.i-file-jpg,.i-file-jpeg,.i-file-gif,.i-file-png,.i-file-bmp,.i-file-tif,.i-file-tiff,.i-file-wmf,.i-file-ico,.i-folder,.i-folderopen
+{width:16px;height:16px;background-image:url(../img/fileico_v5.png);background-repeat:no-repeat}
+
+.i-16{width:16px;height:16px;}
+.i-32{width:32px;height:32px;}
+.i-64{width:64px;height:64px;}
+
+.i-file{background-position:0 0}
+.i-file.i-32{background-position:0 -70px}
+.i-file-video{background-position:-864px 0}
+.i-file-video.i-32{background-position:-864px -70px}
+.i-file-audio{background-position:-896px 0}
+.i-file-audio.i-32{background-position:-896px -70px}
+.i-file-image{background-position:-512px -32px}
+.i-file-image.i-32{background-position:-512px -102px}
+.i-file-xls,.i-file-xlsx{background-position:-32px 0}
+.i-file-xls.i-32,.i-file-xlsx.i-32{background-position:-32px -70px}
+.i-file-doc,.i-file-docx,.i-file-odt,.i-file-rtf{background-position:-64px 0}
+.i-file-doc.i-32,.i-file-docx.i-32,.i-file-odt.i-32,.i-file-rtf.i-32{background-position:-64px -70px}
+.i-file-ppt,.i-file-pptx{background-position:-96px 0}
+.i-file-ppt.i-32,.i-file-pptx.i-32{background-position:-96px -70px}
+.i-file-7z{background-position:-128px 0}
+.i-file-7z.i-32{background-position:-128px -70px}
+.i-file-rar{background-position:-160px 0}
+.i-file-rar.i-32{background-position:-160px -70px}
+.i-file-zip{background-position:-192px 0}
+.i-file-zip.i-32{background-position:-192px -70px}
+.i-file-htm,.i-file-html{background-position:-288px 0}
+.i-file-htm.i-32,.i-file-html.i-32{background-position:-288px -70px}
+.i-file-js{background-position:-320px 0}
+.i-file-js.i-32{background-position:-320px -70px}
+.i-file-css,.i-file-xml{background-position:-352px 0}
+.i-file-css.i-32,.i-file-xml.i-32{background-position:-352px -70px}
+.i-file-pdf{background-position:-512px 0}
+.i-file-pdf.i-32{background-position:-512px -70px}
+.i-file-psd{background-position:-544px 0}
+.i-file-psd.i-32{background-position:-544px -70px}
+.i-file-ai{background-position:-576px 0}
+.i-file-ai.i-32{background-position:-576px -70px}
+.i-file-fla{background-position:-608px 0}
+.i-file-fla.i-32{background-position:-608px -70px}
+.i-file-swf{background-position:-640px 0}
+.i-file-swf.i-32{background-position:-640px -70px}
+.i-file-txt{background-position:-672px 0}
+.i-file-txt.i-32{background-position:-672px -70px}
+.i-file-dir{background-position:-136px -32px}
+.i-file-dir.i-32{background-position:-136px -32px}
+.i-file-jpg,.i-file-jpeg{background-position:0 -32px}
+.i-file-jpg.i-32,.i-file-jpeg.i-32{background-position:0 -32px}
+.i-file-gif{background-position:-32px -32px}
+.i-file-gif.i-32{background-position:-32px -102px}
+.i-file-png{background-position:-64px -32px}
+.i-file-png.i-32{background-position:-64px -102px}
+.i-file-bmp{background-position:-96px -32px}
+.i-file-bmp.i-32{background-position:-96px -102px}
+.i-file-tif,.i-file-tiff{background-position:-128px -32px}
+.i-file-tif.i-32,.i-file-tiff.i-32{background-position:-128px -102px}
+.i-file-wmf{background-position:-192px -102px}
+.i-file-wmf.i-32{background-position:-192px -102px}
+.i-file-ico{background-position:-224px -32px}
+.i-file-ico.i-32{background-position:-224px -102px}
+.i-folder{background-position:-896px -32px}
+.i-folder.i-32{background-position:-896px -102px}
+.i-folderopen{background-position:-864px -102px}
+.i-folderopen.i-32{background-position:-864px -102px}
+
+
+.ui-dialog .ui-dialog-titlebar button:focus{
+	outline:none;
+}

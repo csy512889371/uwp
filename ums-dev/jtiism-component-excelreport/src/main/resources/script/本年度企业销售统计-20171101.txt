@@ -1,0 +1,73 @@
+.输入定义
+$no>cds.setCell(1)
+$year>cds.getCurDate().dateFormate("yyyy")
+$title>cds.setCell("年度销售统计")
+>>$title = $year + $title
+A1>cds.setCell($title)
+
+.单元格定义
+>>cds.copyARowWithStartTempRow(4)
+
+#企业数据
+$enterprise>cds.data()
+#企业id
+$enterpriseId>cds.getParam("$enterprise").get("ENTINF000")
+
+#序号
+A4>cds.setCell($no)
+>>$no= $no + 1
+
+#企业名称
+B4>cds.getParam("$enterprise").get("ENTINF001")
+
+#社会统一信用代码
+C4>cds.getParam("$enterprise").get("ENTINF015")
+
+#税收第一季度统计数据 REPYOS001 = 1
+$entYosFirst>cds.sql("select ENTINF000, REPYOS001, REPYOS009, REPYOS004, REPYOS005  from SHJT_REP_YOS where ENTINF000 = '${$enterpriseId}' and REPYOS001 = '1' and REPYOS008 BETWEEN '${$year}-01-01' AND DATE_ADD('${$year}-01-01', INTERVAL 1 YEAR)")
+
+#税收第二季度统计数据 REPYOS001 = 2
+$entYosSec>cds.sql("select ENTINF000, REPYOS001, REPYOS009, REPYOS004, REPYOS005  from SHJT_REP_YOS where ENTINF000 = '${$enterpriseId}' and REPYOS001 = '2' and REPYOS008 BETWEEN '${$year}-01-01' AND DATE_ADD('${$year}-01-01', INTERVAL 1 YEAR)")
+
+#税收第三季度统计数据 REPYOS001 = 3
+$entYosThir>cds.sql("select ENTINF000, REPYOS001, REPYOS009, REPYOS004, REPYOS005  from SHJT_REP_YOS where ENTINF000 = '${$enterpriseId}' and REPYOS001 = '3' and REPYOS008 BETWEEN '${$year}-01-01' AND DATE_ADD('${$year}-01-01', INTERVAL 1 YEAR)")
+
+#税收第四季度统计数据 REPYOS001 = 4
+$entYosFour>cds.sql("select ENTINF000, REPYOS001, REPYOS009, REPYOS004, REPYOS005  from SHJT_REP_YOS where ENTINF000 = '${$enterpriseId}' and REPYOS001 = '4' and REPYOS008 BETWEEN '${$year}-01-01' AND DATE_ADD('${$year}-01-01', INTERVAL 1 YEAR)")
+
+#第一季度销售
+D4>cds.getParam("$entYosFirst").index(0).get("REPYOS009")
+
+#第一季度同比
+E4>cds.getParam("$entYosFirst").index(0).get("REPYOS004")
+
+#第一季度环比
+F4>cds.getParam("$entYosFirst").index(0).get("REPYOS005")
+
+#第二季度销售
+G4>cds.getParam("$entYosSec").index(0).get("REPYOS009")
+
+#第二季度同比
+H4>cds.getParam("$entYosSec").index(0).get("REPYOS004")
+
+#第二季度环比
+I4>cds.getParam("$entYosSec").index(0).get("REPYOS005")
+
+#第三季度销售
+J4>cds.getParam("$entYosThir").index(0).get("REPYOS009")
+
+#第三季度同比
+K4>cds.getParam("$entYosThir").index(0).get("REPYOS004")
+
+#第三季度环比
+L4>cds.getParam("$entYosThir").index(0).get("REPYOS005")
+
+
+#第四季度销售
+M4>cds.getParam("$entYosFour").index(0).get("REPYOS009")
+
+#第四季度同比
+N4>cds.getParam("$entYosFour").index(0).get("REPYOS004")
+
+#第四季度环比
+O4>cds.getParam("$entYosFour").index(0).get("REPYOS005")

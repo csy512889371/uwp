@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jtiism-uwp-web:war">
+    <output-path>$PROJECT_DIR$/jtiism-uwp-web/target</output-path>
+    <root id="archive" name="jtiism-uwp-web.war">
+      <element id="artifact" artifact-name="jtiism-uwp-web:war exploded" />
+    </root>
+  </artifact>
+</component>

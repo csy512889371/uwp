@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.rjsoft</groupId>
+		<artifactId>jtiism-dev</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+
+	<artifactId>jtiism-uwp-web</artifactId>
+	<version>${jtiism-uwp-web.version}</version>
+	<packaging>war</packaging>
+	<name>jtiism-uwp-web Maven Webapp</name>
+
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-common-utils</artifactId>
+			<version>${jtiism-common-utils.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-common-core</artifactId>
+			<version>${jtiism-common-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-uwp-dao</artifactId>
+			<version>${jtiism-uwp-dao.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-uwp-service</artifactId>
+			<version>${jtiism-uwp-service.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-uwp-controller</artifactId>
+			<version>${jtiism-uwp-controller.version}</version>
+		</dependency>
+
+		
+		<!-- web begin -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- web end -->
+
+		<dependency>
+			<groupId>net.sourceforge.pjl-comp-filter</groupId>
+			<artifactId>pjl-comp-filter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver.jdbc</groupId>
+			<artifactId>sqljdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>cn.songxinqiang</groupId>
+            <artifactId>com.baidu.ueditor</artifactId>
+            <version>1.1.2-offical</version>
+        </dependency>
+
+
+    </dependencies>
+
+	<build>
+		<finalName>jtiism-uwp-web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

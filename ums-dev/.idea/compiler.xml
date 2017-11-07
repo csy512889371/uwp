@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jtiism-common-controller" />
+        <module name="jtiism-common-core" />
+        <module name="jtiism-common-service" />
+        <module name="jtiism-common-utils" />
+        <module name="jtiism-component-excelreport" />
+        <module name="jtiism-component-redis" />
+        <module name="jtiism-uwp-controller" />
+        <module name="jtiism-uwp-dao" />
+        <module name="jtiism-uwp-service" />
+        <module name="jtiism-uwp-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jtiism-common-controller" target="1.8" />
+      <module name="jtiism-common-core" target="1.8" />
+      <module name="jtiism-common-service" target="1.8" />
+      <module name="jtiism-common-utils" target="1.8" />
+      <module name="jtiism-component-activemq" target="1.8" />
+      <module name="jtiism-component-excelreport" target="1.8" />
+      <module name="jtiism-component-redis" target="1.8" />
+      <module name="jtiism-dev" target="1.7" />
+      <module name="jtiism-enterprise-controller" target="1.8" />
+      <module name="jtiism-enterprise-dao" target="1.8" />
+      <module name="jtiism-enterprise-service" target="1.8" />
+      <module name="jtiism-member-controller" target="1.8" />
+      <module name="jtiism-uwp-controller" target="1.8" />
+      <module name="jtiism-uwp-dao" target="1.8" />
+      <module name="jtiism-uwp-service" target="1.8" />
+      <module name="jtiism-uwp-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

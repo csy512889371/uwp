@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<FONTS>
+		<font name="宋体" marginTop="2" marginLeft="5">
+			<wordSize size="12" width="8" height="19" />
+			<wordSize size="11" width="8" height="18" />
+			<wordSize size="10" width="7" height="16" />
+			<wordSize size="9" width="6" height="15" />
+			<wordSize size="8" width="6" height="14" />
+		</font>
+	</FONTS>
+</config>

@@ -1,0 +1,400 @@
+@charset "utf-8";
+/* CSS Document */
+/*---------------------------首页--------------------------------------*/
+*{
+    margin: 0px;
+    padding: 0px;
+	cursor:default;
+}
+
+	
+body{
+	overflow:hidden;
+	font-family:"微软雅黑";
+	}
+button{
+	font-family:"微软雅黑";
+	}
+a{
+	color:#888;
+	}
+h2{
+	color:#fff;
+	font-family:"微软雅黑";
+	}
+a,li{
+	list-style:none;
+	text-decoration:none;
+	cursor:default;
+	}
+ .wrap{
+	 width:100%;
+	 height:100%;
+	 }
+
+/*---------------------------登录界面--------------------------------------*/
+.login_top{
+	height:300px;
+
+	z-index:1;
+	width:100%;
+	text-align:center;
+	overflow:hidden;
+	background-color:#009999;
+	}
+.login_top p{
+	margin-top:4%;
+	color:#fff;
+	font-size:35px;
+	}
+
+.login{
+	width:100%;
+	min-width:1024px;
+	position:absolute;
+	top:0;
+	left:0;
+	height:100%;
+	z-index:10;
+	}
+	
+.logo{
+	width:100%;
+	text-align:center;
+	font-size:2em;
+	color:#33686c !important;
+	margin-top:10%;
+	letter-spacing:2px;
+	text-shadow:0 0 35px rgba(255,255,255,0.3)
+	}
+
+.login_box{
+	position:absolute;
+	left:50%;
+	top:50%;
+	width:410px;
+	margin:-185px 0 0 -205px;
+	border:1px solid #038dcb;
+	/*border-bottom:2px solid #ccc;*/
+	background: url(../img/login/login_box.png) repeat;
+	box-shadow:0 0 5px rgba(0,0,0,0.1);
+	overflow:hidden;
+	padding-bottom:15px;
+	}
+.login_box span{
+	color:#fff;
+	display:block;
+	width:100%;
+	overflow:hidden;
+	line-height:40px;
+	font-size:17px;
+	height:40px;
+	padding-left:20px;
+	border-bottom:1px solid #038dcb;
+	}
+.login_box ul{
+	display:block;
+	width:100%;
+	text-align:center;
+	padding-top:20px;
+	}
+.login_box ul li{
+	margin-bottom:18px;
+	width:330px;
+	display:inline-block;
+	height:40px;
+	line-height:40px;
+	}
+.login_box ul li input{
+	width:290px;
+	height:40px;
+	line-height:40px;
+	border:1px solid #ccc;
+	padding-left:40px;
+	background-color:#fff;
+	font-family:"微软雅黑";
+	color:#000;
+	}
+.user{
+	background:url(../img/login/user.png) no-repeat 4% 50%;
+	}
+.password{
+	background:url(../img/login/locked.png) no-repeat 4.2% 50%;
+	}
+.login_box ul li button{
+	width:330px;
+	height:40px;
+	background: #F86C6B;
+	color:#fff;
+	letter-spacing:4px;
+	border:none;
+	}
+.login_box ul li button:hover{
+	background:#F93;
+	}
+.login_box p{
+	width:330px;
+	display:block;
+	margin:0 auto;
+	color:#666;
+	font-size:14px;
+	}
+.login_box p a{
+	font-size:14px;
+	font-weight:normal;
+	
+	}
+.login_box p b a{
+	color:#5ebaae;
+	}
+.login_box p b{
+	
+	}
+
+.login_box p strong{
+	color:#f00;
+	margin-left:10px;
+	font-weight:normal;
+	}
+ .footer{
+	 width:100%;
+	 position:absolute;
+     color:#999;
+	 font-size:12px;
+	 bottom:2%;
+	 text-align:center;
+	 margin-top:0px;
+	 }
+
+/*---------------------------首页--------------------------------------*/
+body{
+	overflow:hidden;
+	font-family:"微软雅黑";
+	}
+button{
+	font-family:"微软雅黑";
+	}
+a{
+	color:#888;
+	}
+
+
+
+/********************************************************************************************
+ *                                        顶部内容                                           *
+ ********************************************************************************************/
+.top{
+	
+	width:100%;
+	height:70px;
+	background-color:#009999;
+	/*border-bottom:5px solid #0CF;*/
+	}
+.system_title{
+	float:left;
+	color:#fff;
+	line-height:70px;
+	margin-left:20px;
+	font-size:27px;
+	}
+.top_right{
+	float:right;
+	}
+.top_right ul{
+	margin-top:40px;
+	margin-right:20px;
+	}
+.top_right ul li{
+	float:left;
+	color:#fff;
+	font-size:13px;
+	margin-left:15px;
+	/* color:#000; */
+	}
+.top_right ul li a{
+	color:#fff;
+	text-decoration:underline;
+	}
+.top_right ul li a:hover{
+	color:#0CF;
+	}
+/********************************************************************************************
+ *                                        导航                                           *
+ ********************************************************************************************/
+.navs{
+	width:100%;
+	height:35px;
+	background-color:#00aaaa;
+	text-align:center;
+	/*border-bottom:5px solid #fff;*/
+	}
+.navs ul{
+	margin:0 auto;
+	margin-left:0px;
+	}
+.navs ul li{
+	float:left;
+	width:9.9%;
+	text-align:center;
+	line-height:35px;
+	font-size:16px;
+	/* border-left:1px solid #1884b7; */
+	}
+.navs ul li a{
+	color:#fff;
+	display:block;
+	height:35px;
+	width:100%;
+	text-decoration: none;
+	}
+.navs ul li a:hover{
+	background-color:#008888;
+	}
+/********************************************************************************************
+ *                                        左侧                                           *
+ ********************************************************************************************/
+.left{
+	width:15%;
+	height:100%;
+	z-index:10;
+	min-width:200px;
+	position:absolute;
+	background-color:#eef1f3;
+	border-right:1px solid #ddd;
+	overflow:hidden;
+	padding:20px 0 0 0px;
+	font-size:14px;
+	line-height:23px;
+	}
+.left span{
+	margin-left:15px;
+	background:url(../img/login/top-icon2.png) no-repeat 0 50%;
+	padding-left:15px;
+	}	
+.left span a{
+	color:#000;
+	}	
+.left ul{
+	margin-left:35px;
+	}
+.left ul li a:hover{
+	color:#09F;
+	}	
+	/********************************************************************************************
+ *                                        右侧                                           *
+ ********************************************************************************************/
+.right{
+	position:absolute;
+	right:0;
+	width:85%;
+	height:100%;
+	
+	}
+.right_top{
+	width:100%;
+	height:30px;
+	font-size:12px;
+	line-height:30px;
+	padding-left:10px;
+	background-color:#f0f5f7;
+	border-bottom:1px solid #eee;
+	color:#999;
+	}
+.right_top a{
+	color:#999;
+	}
+.button_content{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	color: red;
+	font-style: italic
+}
+input.error{
+	  border-color:red !important;
+}
+form input{
+	float: left;
+}
+
+textarea.error{
+	  border:1px solid red;
+}
+
+/*系统选择、退出*/
+.index_div{
+	margin-right: 10px;
+}
+
+.index_div ul li a{
+	text-decoration: none;
+}
+
+.index_div, .index_div a{
+	text-decoration: none;
+	color: #fff;
+	font-size: 14px;
+}
+
+.index_div a:hover{
+	text-decoration: none;
+	color: #00cccc;
+}
+
+.logout{
+	background: url(../img/index/logout.png) no-repeat 0 50%;
+	padding-left:20px;
+	cursor:pointer !important;
+}
+
+.logout:hover{
+	background: url(../img/index/logout_hover.png) no-repeat 0 50%;
+	padding-left:20px;
+	cursor:pointer !important;
+}
+
+.sys_choose{
+	background: url(../img/index/syschoose.png) no-repeat 0 50%;
+	padding-left:20px;
+	cursor:pointer !important;
+}
+
+.sys_choose:hover{
+	background: url(../img/index/syschoose_hover.png) no-repeat 0 50%;
+	padding-left:20px;
+	cursor:pointer !important;
+}
+
+/*操作菜单*/
+.oper_menu{
+	/* background-color: #f5f5f5; */
+	margin-bottom: 10px;
+}
+
+.noborder{border: 1px solid #fff;}
+
+/*控制左侧菜单下拉效果*/
+.ztree1 * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+.ztree1 li ul{ margin:0; padding:0}
+.ztree1 li {line-height:30px;}
+.ztree1 li a {width:160px;height:30px;padding-top: 0px;}
+.ztree1 li a:hover {text-decoration:none; background-color: #33d6d6;cursor:default;}
+.ztree1 li a span.button.switch {visibility:hidden}
+.ztree1.showIcon li a span.button.switch {visibility:visible}
+.ztree1 li a.curSelectedNode {background-color:#00cccc;border:0;height:30px;}
+.ztree1 li span {line-height:30px;}
+.ztree1 li span.button {/* margin-top: -7px; */}
+.ztree1 li span.button.switch {width: 16px;height: 16px;}
+.ztree1 li a.level0{background-color: #00bbbb;}
+.ztree1 li a.level0:hover{cursor:default;}
+.ztree1 li a.level0 span {font-size: 110%;font-weight: bold;padding-left: 5px;}
+.ztree1 li a.level1 span {padding-left: 10px;}
+.ztree1 li span.button {background-image:url(""); *background-image:url("")}
+.ztree1 li span.button.switch.level0 {width: 20px; height:20px}
+.ztree1 li span.button.switch.level1 {width: 20px; height:20px}
+.ztree1 li span.button.noline_open {background-position: 0 0;}
+
+
+.sp{color: #3F3F3F;text-decoration: underline;font-size: 12px;cursor: pointer;}

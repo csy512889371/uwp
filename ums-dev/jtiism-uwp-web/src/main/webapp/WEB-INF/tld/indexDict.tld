@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-JSPtaglibrary_2_0.xsd">
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>indexDict</short-name>
+	<uri>/indexDict</uri>
+
+	<function>
+		<description>get code name</description>
+		<name>getCodeName</name>
+		<function-class>rongji.framework.web.tag.IndexDictUtils
+		</function-class>
+		<function-signature>java.lang.String getCodeName(java.lang.String, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<description>get code name</description>
+		<name>getSplitCodeName</name>
+		<function-class>rongji.framework.web.tag.IndexDictUtils
+		</function-class>
+		<function-signature>java.lang.String getSplitCodeName(java.lang.String, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<description>get code name</description>
+		<name>getFullCodeName</name>
+		<function-class>rongji.framework.web.tag.IndexDictUtils
+		</function-class>
+		<function-signature>java.lang.String getFullCodeName(java.lang.String, java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+	<function>
+		<description>get code name</description>
+		<name>getCsmsUnitCodeName</name>
+		<function-class>rongji.framework.web.tag.IndexDictUtils
+		</function-class>
+		<function-signature>java.lang.String getCsmsUnitCodeName(java.lang.String)
+		</function-signature>
+	</function>
+
+</taglib>

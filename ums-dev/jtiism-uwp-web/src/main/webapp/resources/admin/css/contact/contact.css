@@ -1,0 +1,66 @@
+body{
+    background-color: rgb(246,246,246);
+    font-family: Microsoft YaHei;
+}
+
+.container{
+    margin: 60px auto;
+    width: 1200px;
+    font-size: 0;
+}
+
+
+.m-box{
+    height: 280px;
+    width: 393px;
+    display: inline-block;
+    background-color: white;
+    vertical-align: middle;
+    padding: 34px 25px 0 25px;
+    box-sizing: border-box;
+}
+.m-box+.m-box{
+    margin-left:10px;
+}
+.m-box i{
+    display: block;
+    background-size: contain;
+    margin:0 auto;
+}
+.m-box .line{
+    width:96px;
+    height:1px;
+    background-color: #aaa;
+    margin:30px auto 34px auto;
+}
+.m-box p{
+    width: 340px;
+    font-size:20px;
+    color:#999;
+    margin:10px;
+}
+.m-box .i-map{
+    width: 42px;
+    height: 55px;
+    background: url("img/map.png")  no-repeat;
+}
+.m-box .i-phone{
+    width: 41px;
+    height: 55px;
+    background: url("img/phone.png") no-repeat;
+}
+.m-box .i-email{
+    width: 45px;
+    height: 55px;
+    background:url("img/email.png") no-repeat;
+}
+
+.map-box{
+    width: 1200px;
+    height: 524px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: white;
+    font-size: 20px;
+    box-sizing: border-box;
+}

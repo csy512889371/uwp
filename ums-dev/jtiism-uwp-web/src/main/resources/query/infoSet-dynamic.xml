@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <!-- 添加 表 -->
+    <sql-query name="infoSet.createTableFKA01">
+        <![CDATA[
+		CREATE TABLE ${infoSet} (${keyName} varchar(36) NOT NULL , UNITID varchar(36) NOT NULL ,
+		constraint ${primaryKeyN} primary key (${keyName}) )
+	]]>
+    </sql-query>
+
+    <!-- 添加 表 外键约束-->
+    <sql-query name="infoSet.createTableFKUnitInfo">
+        <![CDATA[
+		CREATE TABLE ${infoSet} (${keyName} varchar(36) primary key , ENTINF000 varchar(36) NOT NULL ,
+		constraint ${foreignKeyN} foreign key (ENTINF000) references SHJT_ENT_INF(ENTINF000) )
+	]]>
+    </sql-query>
+    <!-- 添加 列 -->
+    <sql-query name="infoSet.addColumn">
+        <![CDATA[
+		ALTER TABLE ${infoSet} ADD ${columnName}
+		<#if paramType=='varchar'>
+		varchar(${lengthLimit}) NULL
+		</#if>
+		<#if paramType=='datetime'>
+		datetime NULL
+		</#if>
+		<#if paramType=='text'>
+		text NULL
+		</#if>
+	]]>
+    </sql-query>
+
+    <!-- 删除行 -->
+    <sql-query name="infoSet.deleteData">
+        <![CDATA[
+		DELETE FROM ${infoSet} WHERE ${keyName}='${keyValue}'
+	]]>
+    </sql-query>
+
+    <!-- 删除多行 -->
+    <sql-query name="infoSet.deleteDataNotIn">
+        <![CDATA[
+		DELETE FROM ${infoSet} WHERE ${keyName} not in (
+		    <#list keyValue?split(",") as id>
+				'${id}'<#if id_has_next>,</#if>
+			</#list>)
+		 and ${foreignKey}='${foreignKeyValue}'
+	]]>
+    </sql-query>
+
+    <!-- 删除多行 -->
+    <sql-query name="infoSet.deleteDataAllByEntId">
+        <![CDATA[
+		DELETE FROM ${infoSet} WHERE ${foreignKey}='${foreignKeyValue}'
+	]]>
+    </sql-query>
+
+    <!-- 新增加记录 insert into tableName (column) VALUES('columnValue') -->
+    <sql-query name="infoSet.insertData">
+        <![CDATA[
+		insert into ${infoSet} (
+			<#list columnMap.keySet() as columnName>
+				<#if columnName_has_next>
+			     ${columnName},
+				<#else>
+					${columnName}
+				</#if>
+			</#list>
+		)
+		VALUES(
+			<#list columnMap.keySet() as columnName>
+				<#if columnName_has_next>
+			     	<#if columnMap.get(columnName)!="">
+			     		'${columnMap.get(columnName)}',
+			     	<#else>
+			     		NULL,
+			     	</#if>
+				<#else>
+					<#if columnMap.get(columnName)!="">
+			     		'${columnMap.get(columnName)}'
+			     	<#else>
+			     		NULL
+			     	</#if>
+				</#if>
+			</#list>
+		)
+	]]>
+    </sql-query>
+    <sql-query name="infoSet.updateData">
+        <![CDATA[
+	 	update ${infoSet} set 
+	 	<#list columnMap.keySet() as columnName>
+				<#if columnName_has_next>
+					<#if columnMap.get(columnName)!="">
+			     		${columnName}='${columnMap.get(columnName)}',
+			     	<#else>
+			     		${columnName}=NULL,
+			     	</#if>
+				<#else>
+					<#if columnMap.get(columnName)!="">
+			     		${columnName}='${columnMap.get(columnName)}'
+			     	<#else>
+			     		${columnName}=NULL
+			     	</#if>
+				</#if>
+		</#list>
+	 	 where ${keyName}='${keyValue}'
+	 	
+	]]>
+    </sql-query>
+
+    <sql-query name="infoSet.listTranDict">
+        <![CDATA[
+	 	select egjb04.CODE as code, egjb04.CODE_NAME as codeName, 
+		egjb04.CODE_ABR1 codeAbr1,  egjb04.CODE_ABR2 codeAbr2, egjb04.SUP_CODE supCode,
+		egjb04.CODE_SPELLING codeSpelling,SUBSTRING(dbo.DateFmt4(egjb04.a1107),0,11) codeNameSuffix,
+		egjb04.CODE_ANAME codeAName, egjb04.DmGrp dmGrp
+		from EGJB04 egjb04 
+		where egjb04.yesprv = 1 and egjb04.INVALID = 1  ORDER BY egjb04.A1107 desc
+	]]>
+    </sql-query>
+
+
+    <!-- 安监 grid 列表根据状态查询
+    <#if type!='0'>
+				and ENTSSM016 > 0
+				</#if>
+    -->
+    <sql-query name="infoSet.gridQuery">
+        <![CDATA[
+			<#if infoSet=='SHJT_ENT_SSM'>
+
+				order by ENTSSM015 desc
+			<#elseif infoSet=='SHJT_ENT_YOS'>
+				ORDER BY ENTYOS002 DESC,ENTYOS003 ASC
+			<#else>
+				and 1=1
+			</#if>
+
+	]]>
+    </sql-query>
+
+
+</dynamic-hibernate-statement>

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+
+    <!--  -->
+    <sql-query name="enterprise.WithNoCondition">
+        <![CDATA[
+	FROM CFG_UMS_ROLE_USER  roleUser
+		INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        INNER JOIN SHJT_ENT_INF inf ON  inf.entInf023 = UNITINFO.b00
+
+		WHERE inf.ENTINF050=0 and roleUser.USERID =:userId
+		<#--  类别   -->
+		<#if type?? && type!="">
+			and inf.ENTINF003 in(
+			<#list type?split(",") as types>
+				'${types}'<#if types_has_next>,</#if>
+			</#list>)
+		</#if>
+		<#--  企业名称   -->
+		<#if name?? && name!="">
+			and (inf.ENTINF001 like '%${name}%' or inf.ENTINF002 like '%${name}%')
+		</#if>
+		<#--  所有制类别   -->
+		<#if syztype?? && syztype!="" >
+			and inf.ENTINF019 in(
+			<#list syztype?split(",") as syztypes>
+				'${syztypes}'<#if syztypes_has_next>,</#if>
+			</#list>)
+		</#if>
+		<#--  机构   -->
+		<#if unitIds?? && unitIds!="" >
+			and inf.ENTINF023 in(
+			<#list unitIds?split(",") as ids>
+				'${ids}'<#if ids_has_next>,</#if>
+			</#list>)
+		</#if>
+		 <#--  管理状态  -->
+		<#if include?? >
+			<#if include=='1'>
+			 and inf.ENTINF049='1'
+			<#elseif include=='2'>
+			 and (inf.ENTINF049='1' or inf.ENTINF049='2')
+			</#if>
+		</#if>
+	]]>
+    </sql-query>
+
+    <sql-query name="enterprise.QueryByUnitId">
+        <![CDATA[
+		FROM CFG_UMS_ROLE_USER  roleUser
+		INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        INNER JOIN SHJT_ENT_INF inf ON  inf.entInf023 = UNITINFO.b00
+
+		WHERE inf.ENTINF050=0 AND roleUser.USERID =:userId AND inf.ENTINF023 in(
+		<#list unitInfoId?split(",") as ids>
+			'${ids}'<#if ids_has_next>,</#if>
+		</#list>)
+		<#--  类别   -->
+		<#if type?? && type!="" >
+			and inf.ENTINF003=:type
+		</#if>
+		<#--  企业名称   -->
+		<#if name?? && name!="" >
+			and (inf.ENTINF001 like '%${name}%' or inf.ENTINF002 like '%${name}%')
+		</#if>
+		<#--  所有制类别   -->
+		<#if syztype?? && syztype!="" >
+			and inf.ENTINF019=:syztype
+		</#if>
+		<#--  管理状态  -->
+		<#if include?? >
+			<#if include=='1'>
+			 and inf.ENTINF049='1'
+			<#elseif include=='2'>
+			 and (inf.ENTINF049='1' or inf.ENTINF049='2')
+			</#if>
+		</#if>
+	]]>
+    </sql-query>
+
+
+    <sql-query name="enterprise.queryCombWithSql">
+        <![CDATA[
+		FROM SHJT_ENT_INF
+		]]>
+    </sql-query>
+
+
+    <sql-query name="enterprise.queryCombResultList">
+        <![CDATA[
+		FROM CFG_UMS_ROLE_USER  roleUser
+			INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        	INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        	INNER JOIN SHJT_ENT_INF inf ON  inf.entInf023 = UNITINFO.b00
+			<#if entEarningStart?? || entEarningEnd?? || entOutputStart?? || entOutputEnd?? || entTaxStart?? || entTaxEnd??>
+			INNER JOIN (SELECT aos.ENTAOS005,aos.ENTAOS006,aos.ENTAOS007,aos.ENTINF000 FROM SHJT_ENT_AOS aos WHERE TO_DAYS(aos.ENTAOS001)= TO_DAYS('${entAos001}')) b on inf.ENTINF000=b.ENTINF000
+			</#if>
+			where inf.ENTINF049='1' AND roleUser.USERID=:userId AND inf.ENTINF050='0'
+			<#if entInf001?? >
+			and inf.ENTINF001 like '%${entInf001}%'
+			</#if>
+			<#if entInf003?? >
+			and inf.ENTINF003 in(
+				<#list entInf003?split(",") as gslx>
+				'${gslx}'<#if gslx_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf020?? >
+			and inf.ENTINF020 in(
+				<#list entInf020?split(",") as tzf>
+				'${tzf}'<#if tzf_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf008?? >
+			and inf.ENTINF008 like '%${entInf008}%'
+			</#if>
+			<#if entInf019?? >
+			and inf.ENTINF019 in(
+				<#list entInf019?split(",") as syz>
+				'${syz}'<#if syz_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf015?? >
+			and inf.ENTINF015 like '%${entInf015}%'
+			</#if>
+			<#if entInf012?? >
+			and (
+			<#list entInf012?split(",") as qyhyfl>
+				CONCAT(",", inf.ENTINF012, ",") LIKE CONCAT('%,','${qyhyfl}',',%') <#if qyhyfl_has_next>or</#if>
+			</#list>)
+			</#if>
+			<#if entInf021?? >
+			and inf.ENTINF021 in(
+				<#list entInf021?split(",") as land>
+				'${land}'<#if land_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf022?? >
+			and inf.ENTINF022 in(
+				<#list entInf022?split(",") as area>
+				'${area}'<#if area_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf023?? >
+			and inf.ENTINF023 in(
+				<#list entInf023?split(",") as glqx>
+				'${glqx}'<#if glqx_has_next>,</#if>
+				</#list>)
+			</#if>
+			<#if entInf041?? >
+			and inf.ENTINF041 in(
+				<#list entInf041?split(",") as countries>
+				'${countries}'<#if countries_has_next>,</#if>
+				</#list>)
+			</#if>
+
+			<#if entEarningStart?? >
+			AND b.ENTAOS005 >= ${entEarningStart}
+			</#if>
+			<#if entEarningEnd?? >
+			AND b.ENTAOS005 <= ${entEarningEnd}
+			</#if>
+			<#if entOutputStart?? >
+			AND b.ENTAOS007 >= ${entOutputStart}
+			</#if>
+			<#if entOutputEnd?? >
+			AND b.ENTAOS007 <= ${entOutputEnd}
+			</#if>
+			<#if entTaxStart?? >
+			AND b.ENTAOS006 >= ${entTaxStart}
+			</#if>
+			<#if entTaxEnd?? >
+			AND b.ENTAOS006 <= ${entTaxEnd}
+			</#if>
+
+		
+		]]>
+    </sql-query>
+
+    <hql-query name="enterprise.getEtpInfoSerchName">
+        <![CDATA[
+	FROM
+        SHJT_ENT_INF WHERE 1=1
+	<#-- 删除标记0:未删除 1：已删除 -->
+	<#if delFlag??>
+		<#if delFlag == '0'>
+			AND ENTINF050 = 0
+			<#else>
+				AND ENTINF050 = 1
+		</#if>
+	</#if>
+	]]>
+    </hql-query>
+        <!--根据类型统计企业个数-->
+        <sql-query name="enterprise.getCondictionByType">
+        <![CDATA[
+          <#-- 总数-->
+        <#if type ==1 >
+        AND entInf050 = 0
+        </#if>
+        <#--新入驻-->
+        <#if type ==2 >
+        AND entInf050 = 0 AND entInf049 =1
+        </#if>
+        <#--迁出-->
+        <#if type ==3 >
+        AND entInf050 = 0 AND entInf049 =2
+        </#if>
+       <#--收入超过2000（万）-->
+        <#if type ==4 >
+        AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+        DATE_FORMAT(yos.ENTYOS002,'%Y') = DATE_FORMAT(NOW(),'%Y')  AND yos.ENTYOS003 =  ceil(DATE_FORMAT(now(),'%m')/12/0.25)
+        AND
+        yos.ENTYOS004 >=2000 AND yos.ENTINF000 =ent.ENTINF000
+
+        )
+        </#if>
+       <#--收入超过200-2000（万）-->
+        <#if type ==5 >
+        AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+               DATE_FORMAT(yos.ENTYOS002,'%Y') = DATE_FORMAT(NOW(),'%Y')  AND yos.ENTYOS003 =  ceil(DATE_FORMAT(now(),'%m')/12/0.25)
+        AND
+        yos.ENTYOS004 >=200 AND  yos.ENTYOS004 <=2000 AND  yos.ENTINF000 =ent.ENTINF000 )
+        </#if>
+        <#--收入超过100-2000（万）-->
+        <#if type ==6 >
+        AND entInf050 = 0 AND EXISTS( SELECT 1  FROM SHJT_ENT_YOS yos  WHERE
+                 DATE_FORMAT(yos.ENTYOS002,'%Y') = DATE_FORMAT(NOW(),'%Y')  AND yos.ENTYOS003 =  ceil(DATE_FORMAT(now(),'%m')/12/0.25)
+        AND
+        yos.ENTYOS004 >=100 AND  yos.ENTYOS004 <=2000 AND  yos.ENTINF000 =ent.ENTINF000 )
+        </#if>
+        <#--商贸型-->
+        <#if type ==7 >
+        AND entInf050 = 0 AND entInf026 =2
+        </#if>
+        <#--实体型-->
+        <#if type ==8 >
+        AND entInf050 = 0 AND entInf026 =1
+        </#if>
+		]]>
+    </sql-query>
+
+
+</dynamic-hibernate-statement>

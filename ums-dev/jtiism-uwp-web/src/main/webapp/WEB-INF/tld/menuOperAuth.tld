@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>menuOper</short-name>
+    <uri>/menuOper</uri>
+    <description>
+        <![CDATA[企业的操作权限（角色-处室  匹配 干部-处室）.]]>
+    </description>
+    <tag>
+        <name>auth</name>
+        <tag-class>rongji.framework.web.tag.MenuOperAuthTag</tag-class>
+        <body-content>jsp</body-content>
+        <attribute>
+            <name>operAuthCode</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[ 菜单操作项的权限编号.]]>
+            </description>
+        </attribute>
+        <attribute>
+            <name>entId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[ 企业ID.]]>
+            </description>
+        </attribute>
+        <attribute>
+            <name>fromType</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[ 访问类型 admin 后台 member 门户.]]>
+            </description>
+        </attribute>
+    </tag>
+</taglib>

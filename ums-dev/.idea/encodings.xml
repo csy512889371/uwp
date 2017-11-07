@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-common-controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-common-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-common-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-common-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-component-activemq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-component-excelreport" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-component-excelreport/src/main/resources/script/上年度企业税收.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-component-redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-enterprise-controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-enterprise-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-enterprise-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-member-controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-uwp-controller" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-uwp-dao" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-uwp-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jtiism-uwp-web" charset="UTF-8" />
+  </component>
+</project>

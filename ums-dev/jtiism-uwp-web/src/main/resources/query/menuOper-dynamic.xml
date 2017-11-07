@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+
+
+
+    <sql-query name="menuOper.getUserEntMenuOperRight">
+        <![CDATA[
+        SELECT PERMISSION FROM CFG_UMS_MENU_OPER  MENUOPER WHERE EXISTS(
+            SELECT  1 FROM CFG_UMS_ROLE_USER  ROLEUSER INNER JOIN CFG_UMS_ROLE_MENU_OPER RMENUOPER ON RMENUOPER.ROLE_ID = ROLEUSER.ROLEID
+            INNER JOIN CFG_UMS_MENU MENU  ON  MENU.ID = RMENUOPER.MENUID
+            INNER JOIN ROLE_DEPT_RELA ROLEDEPT ON ROLEDEPT.ROLE_ID = ROLEUSER.ROLEID
+            INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.B0120 = ROLEDEPT.DEPT_ID
+            INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.ENTINF023 = UNITINFO.B00
+            WHERE MENU.CODE = 'entmanageIndex' AND ROLEUSER.USERID = :userId and RMENUOPER.OPERATION_IDS like CONCAT( '%',MENUOPER.ID,'%')
+        AND ENFINF.ENTINF000 = :entId )
+	]]>
+    </sql-query>
+    <sql-query name="menuOper.getRoleEntMenuOperRight">
+        <![CDATA[
+        SELECT PERMISSION FROM CFG_UMS_MENU_OPER  MENUOPER WHERE EXISTS(
+            SELECT  1 FROM CFG_UMS_ROLE_USER  ROLEUSER INNER JOIN CFG_UMS_ROLE_MENU_OPER RMENUOPER ON RMENUOPER.ROLE_ID = ROLEUSER.ROLEID
+            INNER JOIN CFG_UMS_MENU MENU  ON  MENU.ID = RMENUOPER.MENUID
+            INNER JOIN ROLE_DEPT_RELA ROLEDEPT ON ROLEDEPT.ROLE_ID = ROLEUSER.ROLEID
+            INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.B0120 = ROLEDEPT.DEPT_ID
+            INNER JOIN SHJT_ENT_INF ENFINF ON  ENFINF.ENTINF023 = UNITINFO.B00
+            WHERE MENU.CODE = 'entmanageIndex' AND ROLEUSER.ROLEID = :roleId and RMENUOPER.OPERATION_IDS like CONCAT( '%',MENUOPER.ID,'%')
+        AND ENFINF.ENTINF000 = :entId )
+	]]>
+    </sql-query>
+
+
+
+</dynamic-hibernate-statement>

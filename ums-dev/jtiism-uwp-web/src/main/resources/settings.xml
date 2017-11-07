@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmis>
+
+	<setting name="uploadMaxSize" value="10" />
+	<setting name="uploadImageExtension" value="jpg,jpeg,bmp,gif,png" />
+	<setting name="uploadFlashExtension" value="swf,flv" />
+	<setting name="uploadMediaExtension" value="swf,flv,mp3,wav,avi,rm,rmvb" />
+	<setting name="uploadFileExtension" value="zip,rar,7z,doc,docx,xls,xlsx,ppt,pptx" />
+	<setting name="imageUploadPath" value="/upload/image/${.now?string('yyyyMM')}/" />
+	<setting name="flashUploadPath" value="/upload/flash/${.now?string('yyyyMM')}/" />
+	<setting name="mediaUploadPath" value="/upload/media/${.now?string('yyyyMM')}/" />
+	<setting name="fileUploadPath" value="/upload/file/${.now?string('yyyyMM')}/" />
+	<setting name="tempUploadPath" value="/upload/temp/${.now?string('yyyyMM')}/" />
+	<setting name="docUploadPath" value="/upload/doc/${.now?string('yyyyMM')}/" />
+	<setting name="exchangeUploadPath" value="/upload/exchange/" />
+	<setting name="templateUploadPath" value="resource/template/report/" />
+	<setting name="dynajsPath" value="/resources/admin/modules/dynaInfo/" />
+	<setting name="accountLockTime" value="5" />
+	<setting name="accountLockCount" value="3" />
+	<setting name="memberAccountRoleId" value="2" />
+	<setting name="memberAccountNoAprRoleId" value="3" />
+	
+	
+	<!-- 资源根目录，包括图片资源，上传资源 -->
+	<setting name="resourcePath" value="E:/jtiism_data/" />
+
+	<setting name="needRedis" value="true" />
+	
+	<!-- 压缩包密码设置 -->
+	<setting name="zipPassword" value="123456" />
+
+	<setting name="cadreImageWidth" value="276" />
+	<setting name="cadreImageHeight" value="345" />
+
+    <template id="adminCommonJs" type="page" name="admin_common_js" templatePath="/js/common.ftl" staticPath="/resources/admin/js/common.js" />
+    
+</cmis>

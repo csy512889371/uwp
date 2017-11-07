@@ -1,0 +1,18 @@
+.loading-indicator-bars {
+	/*background: url( '/resources/admin/css/mmgrid/img/loading.gif' );//这个是进度条的图片*/
+	width: 150px;
+}
+
+.loading-indicator {
+	height: 80px;
+	width: 80px;
+	background: url( '/resources/admin/css/mmgrid/img/loading.gif' );
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.loading-indicator-overlay {
+	background-color: #FFFFFF;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
+}

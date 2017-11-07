@@ -1,0 +1,23 @@
+<!-- Html Template DTD.
+
+<!DOCTYPE dyna-html-hibernate-statement PUBLIC
+    "-//Haier/Html Template DTD 1.0//EN"
+    "http://www.jtiism.com/dtd/dyna-html-hibernate-statement-1.0.dtd">
+
+这个文件时用来定义动态参数语句
+
+-->
+
+<!--
+	The document root.
+ -->
+
+<!ELEMENT dyna-html-hibernate-statement (
+	(html-tmplate)*
+)>
+<!-- default: none -->
+
+<!ELEMENT html-tmplate (#PCDATA)>
+	<!ATTLIST html-tmplate name CDATA #REQUIRED>
+
+

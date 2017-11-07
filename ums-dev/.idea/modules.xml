@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jtiism-common-controller/jtiism-common-controller.iml" filepath="$PROJECT_DIR$/jtiism-common-controller/jtiism-common-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-common-core/jtiism-common-core.iml" filepath="$PROJECT_DIR$/jtiism-common-core/jtiism-common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-common-service/jtiism-common-service.iml" filepath="$PROJECT_DIR$/jtiism-common-service/jtiism-common-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-common-utils/jtiism-common-utils.iml" filepath="$PROJECT_DIR$/jtiism-common-utils/jtiism-common-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-component-excelreport/jtiism-component-excelreport.iml" filepath="$PROJECT_DIR$/jtiism-component-excelreport/jtiism-component-excelreport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-component-redis/jtiism-component-redis.iml" filepath="$PROJECT_DIR$/jtiism-component-redis/jtiism-component-redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-dev.iml" filepath="$PROJECT_DIR$/jtiism-dev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-uwp-controller/jtiism-uwp-controller.iml" filepath="$PROJECT_DIR$/jtiism-uwp-controller/jtiism-uwp-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-uwp-dao/jtiism-uwp-dao.iml" filepath="$PROJECT_DIR$/jtiism-uwp-dao/jtiism-uwp-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-uwp-service/jtiism-uwp-service.iml" filepath="$PROJECT_DIR$/jtiism-uwp-service/jtiism-uwp-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtiism-uwp-web/jtiism-uwp-web.iml" filepath="$PROJECT_DIR$/jtiism-uwp-web/jtiism-uwp-web.iml" />
+    </modules>
+  </component>
+</project>

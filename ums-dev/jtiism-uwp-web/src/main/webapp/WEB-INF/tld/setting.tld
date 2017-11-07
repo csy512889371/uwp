@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-JSPtaglibrary_2_0.xsd">
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>setting</short-name>
+	<uri>/setting</uri>
+
+	<function>
+		<description>get setting</description>
+		<name>get</name>
+		<function-class>rongji.framework.util.SettingUtils
+		</function-class>
+		<function-signature>rongji.framework.base.pojo.Setting get()
+		</function-signature>
+	</function>
+
+</taglib>

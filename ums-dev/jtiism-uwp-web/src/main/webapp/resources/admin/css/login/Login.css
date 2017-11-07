@@ -1,0 +1,121 @@
+@charset "utf-8";
+body{
+    overflow: auto;
+}
+.wrapper{
+    width: 100%;
+    height: 100%;
+    background: url("../../img/login/loginbg.jpg") center no-repeat;
+    min-width: 650px;
+    position: relative;
+}
+.wrapper:before{
+    content:'';
+    display: inline-block;
+    width: 80px;
+    height: 95px;
+    background: url("../../img/login/loginlogo.png") center no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 40px;
+    left:70px;
+}
+#loginForm{
+    width: 630px;
+    position: absolute;
+    top:20%;
+    left: 50%;
+    margin-left: -315px;
+    padding-top: 100px;
+    background: url("../../img/login/logintext.png") top center no-repeat;
+}
+.login li{
+    margin-bottom: 24px;
+}
+.login li input,.login li button{
+    width: 404px;
+    box-sizing: border-box;
+    height: 52px;
+    line-height: 50px;
+    padding:0 20px;
+    border-radius: 25px;
+    /*behavior: url(ie-css3.htc);*/
+}
+
+.login li button{
+    /*background-color: #2bcaec;*/
+    background: url("../../img/login/anniu.png") no-repeat -7px -5px ;
+    color: #fff;
+    font-size: 18px;
+    box-shadow: none;
+    border:none;
+}
+.login li button:focus{
+    outline: none;
+}
+.login li button:hover{
+     /*background-color: #2bcaec;*/
+    background: url("../../img/login/anniu1.png") no-repeat -7px -5px;
+     color: #fff;
+     cursor: pointer;
+ }
+#username{
+    /*border:solid 1px #afd7fc;*/
+    /*box-shadow: 1px 1px 1px #6ca0d9;*/
+
+    
+    /*background-color: rgba(79,151,210,0.4);*/
+    /*opacity: .4;*/
+    /*background: url("../../img/login/user.png") no-repeat;*/
+}
+#password{
+    /*background-color: #2986e6;*/
+    /*background-color: rgba(79,151,210,0.4);*/
+    /*opacity: .4;*/
+    /*box-shadow: 1px 1px 1px #2c8ff4;*/
+    /*border:solid 1px #afd7fc;*/
+}
+#username,#password{
+    /*background-color: ;*/
+    background: url("../../img/login/input-default.png") no-repeat -7px -5px ;
+    color: white;
+    border:none;
+    font-size: 16px;
+}
+#username:focus,#password:focus{
+    color:#3c9df7;
+    /*background-color: white;*/
+    /*opacity: 1;*/
+    /*border: solid 1px #aaa;*/
+    outline: none;
+    background: url("../../img/login/input-focus.png") no-repeat -7px -5px ;
+}
+.forgot-box{
+    overflow: hidden;
+    text-align: left;
+}
+.forgot-password{
+    font-size:16px;
+    color: #fff;
+    position: absolute;
+    right: 130px;
+}
+.forgot-password:hover{
+    color: white;
+    text-decoration: underline;
+}
+.register{
+    position: absolute;
+    color: white;
+    right: 215px;
+    font-size: 16px;
+}
+.register:hover{
+    color: white;
+    text-decoration: underline;
+}
+#loginTip{
+    margin-left: 140px;
+    color: red;
+    font-size: 16px;
+}

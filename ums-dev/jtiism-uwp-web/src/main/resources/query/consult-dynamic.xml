@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <sql-query name="consult.queryList">
+        <![CDATA[
+	FROM SHJT_CST_INF  WHERE 1=1
+		<#--  咨询类型   -->
+		<#if cstinf002?? && cstinf002!="">
+			and cstinf002 in(
+			<#list cstinf002?split(",") as cstinf002s>
+				'${cstinf002s}'<#if cstinf002s_has_next>,</#if>
+			</#list>)
+		</#if>
+		<#--  政策类别多选   -->
+		<#if consultTypeId?? && consultTypeId!="">
+			and cstinf002 in(
+		<#list consultTypeId?split(",") as consultTypeIds>
+			'${consultTypeIds}'<#if consultTypeIds_has_next>,</#if>
+		</#list>)
+		</#if>
+		<#--  咨询概述（标题）   -->
+		<#if cstinf003?? && cstinf003!="">
+			and (cstinf003 like '%${cstinf003}%' or cstinf003 like '%${cstinf003}%')
+		</#if>
+		<#--  状态   -->
+		<#if cstinf008?? && cstinf008!="">
+			and (cstinf008 = '${cstinf008}')
+		</#if>
+		<#--  企业   -->
+		<#if entinf000?? && entinf000!="">
+			and entinf000 in(
+			<#list entinf000?split(",") as entinf000s>
+				'${entinf000s}'<#if entinf000s_has_next>,</#if>
+			</#list>)
+		</#if>
+	]]>
+    </sql-query>
+</dynamic-hibernate-statement>

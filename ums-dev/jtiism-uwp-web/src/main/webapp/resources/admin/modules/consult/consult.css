@@ -1,0 +1,116 @@
+.layui-form-select dl{
+    z-index: 9999;
+}
+.spanRequired{
+    font-size:15px;color:red;
+}
+
+#infoSpan {
+    border-collapse: separate;
+    color: rgb(51, 51, 51);
+    display: inline;
+    font-family: "Microsoft yahei", "Microsoft jhenghei", "Segoe UI", tahoma, simsun, sans-serif;
+    font-size: 12px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant-caps: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-weight: normal;
+    height: auto;
+    line-height: 24px;
+    text-size-adjust: 100%;
+    width: auto;
+    -webkit-border-horizontal-spacing: 0.952381px;
+    -webkit-border-vertical-spacing: 0.952381px;
+}
+
+.pl-fileupload-loader-small {
+    position: relative;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid rgb(225,225,225);
+    margin: 3px 6px 3px 0px;
+    border-radius: 3px;
+    background: #f6f7f8;
+}
+.pl-fileupload-loader {
+    z-index: 999;
+    float: left;
+    background: #f6f7f8;
+}
+
+.pl-fileupload-loader-small ._bar {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    left: 0;
+    right: 0;
+    background: #f6f7f8;
+    filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+}
+
+.pl-fileupload-loader-small ._prg {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: #3050f8;
+    filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+}
+
+.pl-fileupload-loader-small a {
+    color: rgb(51,51,51);text-decoration: none;
+}
+
+.pl-fileupload-loader-small ._op {
+    float: left;
+}
+
+.pl-fileupload-loader-small ._btnwrp {
+    float: left;
+}
+
+.pl-fileupload-loader-small ._tit {
+    float: left;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.pl-fileupload-loader-small ._btn {
+    float: left;
+    margin-right: 6px;
+}
+
+.fix, .fix a, .no-overflow, .no-overflow *, .xbx_opt {
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+}
+
+.progressBarInProgress,
+.progressBarComplete,
+.progressBarError {
+    font-size: 0;
+    width: 0%;
+}
+
+.clearfix {
+    zoom: 1;
+}
+.pl-fileupload-loader-small ._gut {
+    position: relative;
+    height: 100%;
+}
+.txwrp {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.left{float:left}
+
+.i-c-g{display:inline-block;vertical-align:middle}
+
+.name_link{text-decoration:underline;cursor:pointer;}
+.name_color{color:#4338ff;}

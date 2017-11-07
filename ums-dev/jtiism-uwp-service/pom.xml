@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.rjsoft</groupId>
+		<artifactId>jtiism-dev</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>jtiism-uwp-service</artifactId>
+	<version>${jtiism-uwp-service.version}</version>
+	<name>jtiism-uwp-service</name>
+
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-common-utils</artifactId>
+			<version>${jtiism-common-utils.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-common-core</artifactId>
+			<version>${jtiism-common-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-common-service</artifactId>
+			<version>${jtiism-common-service.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-uwp-dao</artifactId>
+			<version>${jtiism-uwp-dao.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-component-excelreport</artifactId>
+			<version>${jtiism-component-excelreport.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.rjsoft</groupId>
+			<artifactId>jtiism-component-redis</artifactId>
+			<version>${jtiism-component-redis.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15</artifactId>
+		</dependency>
+		
+
+	</dependencies>
+
+</project>

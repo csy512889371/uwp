@@ -1,0 +1,24 @@
+import java.lang.String;
+import java.util.*;
+public String[] toArray(){
+	return new String[0];
+}
+public String[] toArray(String str){
+	return new String[]{str};
+}
+public String[] toArray(String str1,String str2){
+	return new String[]{str1,str2};
+}
+public String[] toArray(String str1,String str2,String str3){
+	return new String[]{str1,str2,str3};
+}
+public String[] toArray(String str1,String str2,String str3,String str4){
+	return new String[]{str1,str2,str3,str4};
+}
+public String[] toArray(String str1,String str2,String str3,String str4,String str5){
+	return new String[]{str1,str2,str3,str4,str5};
+}
+
+public Object iff(boolean bol,Object obj1,Object obj2){
+     if(bol){return obj1;}else{return obj2;}
+}

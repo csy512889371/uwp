@@ -1,0 +1,8 @@
+function initAddInfoSet() {
+
+}
+
+function initUpdateInfoSet() {
+	
+}
+

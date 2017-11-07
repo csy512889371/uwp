@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+"http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+	<!-- 信息浏览 -->
+	<hql-query name="xxInfo.getXXInfoSerchByName">
+	<![CDATA[
+	FROM XX
+		LEFT JOIN XX_LIBRARY_RELA as XXLibraryRela on XX.ID = XXLibraryRela.ID
+		LEFT OUTER JOIN XX_FUNCTION XXFunction ON XX.ID = XXFunction.ID
+		INNER JOIN BB_function_node_r r ON XX.ID = r.ID
+		LEFT JOIN BB ON BB.BB00 = r.BB00
+		INNER JOIN (
+			SELECT
+				XXR.ID,
+				MIN (XXR.READONLY) readonly
+			FROM
+				CFG_UMS_ROLE_USER ru,
+				ROLE_DEPT_RELA rd,
+				DEPARTMENT_XX_RELA XXR
+			WHERE
+				ru.ROLEID = rd.ROLE_ID
+			AND rd.DEPT_ID = XXR.DMCOD
+			AND userid = :userId
+			GROUP BY
+				XXR.ID
+		) RSET ON XX.ID = Rset.ID
+		WHERE
+		XX.DEL_FLAG = 0
+		AND rec_flag = 0
+		<#if egxBB04=='0'> 
+			AND r.BB00 IS NOT NULL
+			AND BB.EGXBB04 = 0
+		</#if>
+		
+		  <#-- 干部姓名 -->
+	<#if cadreNameArr??>
+        AND (
+            <#list cadreNameArr as cadreNameList>
+			    <#if cadreNameList_has_next>
+			        XX.XX01 like '%${cadreNameList}%' or
+			    <#else>
+			        XX.XX01 like '%${cadreNameList}%'
+			    </#if>
+		    </#list>
+		    <#list cadreNameArr as cadreNameLists>
+			    or XX.XX02 like '%${cadreNameLists}%'
+		    </#list>
+		    <#if cadreSingleNameList??>
+		        <#list cadreSingleNameList as cadreSingleNameLists>
+			        or XX.XX01 like '%${cadreSingleNameLists}%'
+		        </#list> 
+		    </#if>
+		)
+    </#if>
+      <#if cadreName?? && cadreName!='' >
+		AND (
+			XX01 like :cadreName 
+			<#if cadreSingleName?? && cadreSingleName!='' >
+				or XX01 like :cadreSingleName
+			</#if>
+			or XX02 like :cadreName 
+	       )
+	</#if>
+	<#-- 干部类别   -->
+	<#if cadreTypeArr??>
+		AND (
+		<#list cadreTypeArr as cadreType>
+			<#if cadreType_has_next>
+		    	EG_XXX10 like :egXXX10_${cadreType_index} OR
+			<#else>
+				EG_XXX10 like :egXXX10_${cadreType_index}
+			</#if>
+		</#list>
+		) 
+	</#if>
+    <#if egXXX09ArrNotIn?? || egXXX09ArrIn??>       
+        AND ( 
+        	<#if egXXX09ArrIn??>     
+	        EG_XXX09 in (
+	            :egXXX09ArrIn
+	        )
+	       </#if>
+	       <#if egXXX09ArrNotIn?? && egXXX09ArrIn??>  
+	       OR 
+	       </#if>
+	       <#if egXXX09ArrNotIn??>  
+	        EG_XXX09 not in (
+	            :egXXX09ArrNotIn
+	        ) 
+	          </#if>
+        )
+	</#if>
+		AND (
+			XXLibraryRela.UNIT_LIBRARY_ID IN (:libraryIdArr)
+			OR XXFunction.TOP_Order = '01-0000009999-0000009999-0000009999-0000009999'
+		)
+		GROUP BY
+			XX.ID,XX01,XX02,
+			this_duty,XX04,XX17,
+			XX07,XX11b,XX44,XX34,EG_XXX09,
+			EG_XXX06,briefinfo
+	
+	]]>
+	</hql-query>
+	
+	
+	
+	<!-- 组合查询-递归子语句 -->
+	<sql-query name="demo.queryCombWithSqlDemo">
+	<![CDATA[
+		<#if withSqlList??>
+			WITH
+		</#if>
+		<#list withSqlList as withSql>
+			<#-- 最高全日制学历 -->
+			<#if withSql == 'a0801b2List'>
+				a0801b2ZB64 ([code], [sup_code]) AS (
+						SELECT code, sup_code
+						FROM ZB64 
+						WHERE code IN (
+						<#list a0801b2List as a0801b2>
+							<#if a0801b2_has_next>
+						     '${a0801b2}',
+							<#else>
+								'${a0801b2}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT zb64.code, zb64.sup_code
+						FROM ZB64 zb64
+						INNER JOIN a0801b2ZB64 a0801b2JoinZB64 ON zb64.sup_code = a0801b2JoinZB64.code
+						<#-- 博士研究生特殊处理 -->
+						<#if a0801b2Flag??>
+							WHERE zb64.code <> '108'
+						</#if>
+				)
+			</#if>
+			<#-- 最高在职学历 -->
+			<#if withSql == 'a0801b1List'>
+				a0801b1ZB64 ([code], [sup_code]) AS (
+						SELECT code, sup_code
+						FROM ZB64 
+						WHERE code IN (
+						<#list a0801b1List as a0801b1>
+							<#if a0801b1_has_next>
+						     '${a0801b1}',
+							<#else>
+								'${a0801b1}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT zb64.code, zb64.sup_code
+						FROM ZB64 zb64
+						INNER JOIN a0801b1ZB64 a0801b1JoinZB64 ON zb64.sup_code = a0801b1JoinZB64.code
+						<#-- 博士研究生特殊处理 -->
+						<#if a0801b1Flag??>
+							AND zb64.code <> '108'
+						</#if>
+				)
+			</#if>
+			<#-- 最高学历 -->
+			<#if withSql == 'a0801b3List'>
+				a0801b3ZB64 ([code], [sup_code]) AS (
+						SELECT code, sup_code
+						FROM ZB64 
+						WHERE code IN (
+						<#list a0801b3List as a0801b3>
+							<#if a0801b3_has_next>
+						     '${a0801b3}',
+							<#else>
+								'${a0801b3}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT zb64.code, zb64.sup_code
+						FROM ZB64 zb64
+						INNER JOIN a0801b3ZB64 a0801b3JoinZB64 ON zb64.sup_code = a0801b3JoinZB64.code
+						<#-- 博士研究生特殊处理 -->
+						<#if a0801b3Flag??>
+							AND zb64.code <> '108'
+						</#if>
+				)
+			</#if>
+			<#-- 最高全日制学位 -->
+			<#if withSql == 'a0901bList'>
+				a0901bGB6864 ([code], [sup_code]) AS (
+					SELECT code, sup_code
+					FROM GB6864
+					WHERE
+						code IN (
+						<#list a0901bList as a0901b>
+							<#if a0901b_has_next>
+						     '${a0901b}',
+							<#else>
+								'${a0901b}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT gb6864.code, gb6864.sup_code
+						FROM GB6864 gb6864
+						INNER JOIN a0901bGB6864 a0901bJoinGB6864 ON gb6864.sup_code = a0901bJoinGB6864.code
+				)
+			</#if>
+			<#-- 最高在职学位 -->
+			<#if withSql == 'a0901bDutyList'>
+				a0901bDutyGB6864 ([code], [sup_code]) AS (
+					SELECT code, sup_code
+					FROM GB6864
+					WHERE
+						code IN (
+						<#list a0901bDutyList as a0901bDuty>
+							<#if a0901bDuty_has_next>
+						     '${a0901bDuty}',
+							<#else>
+								'${a0901bDuty}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT gb6864.code, gb6864.sup_code
+						FROM GB6864 gb6864
+						INNER JOIN a0901bDutyGB6864 a0901bDutyJoinGB6864 ON gb6864.sup_code = a0901bDutyJoinGB6864.code
+				)
+			</#if>
+			<#-- 最高学位 -->
+			<#if withSql == 'a0901b3List'>
+				a0901b3GB6864 ([code], [sup_code]) AS (
+					SELECT code, sup_code
+					FROM GB6864
+					WHERE
+						code IN (
+						<#list a0901b3List as a0901b3>
+							<#if a0901b3_has_next>
+						     '${a0901b3}',
+							<#else>
+								'${a0901b3}'
+							</#if>
+						</#list>
+						)
+					UNION ALL
+						SELECT gb6864.code, gb6864.sup_code
+						FROM GB6864 gb6864
+						INNER JOIN a0901b3GB6864 a0901b3JoinGB6864 ON gb6864.sup_code = a0901b3JoinGB6864.code
+				)
+			</#if>
+			<#if withSql_has_next>
+				,
+				<#else>
+			</#if>
+		</#list>
+	]]>
+	</sql-query>
+	
+	
+	<!-- 组合查询 -->
+	<sql-query name="demo.queryCombResultListDemo">
+	<![CDATA[
+		FROM
+		<#-- 最高在职学历 / 最高全日制学历 -->
+		<#if a0801b1List?? || a0801b2List??>
+			ZB64 AS zb64,
+		</#if>
+		<#-- 最高全日制学位  / 最高在职学位-->
+		<#if a0901bList?? || a0901bDutyList??>
+			GB6864 AS gb6864,
+		</#if>
+		<#-- 单位性质  -->
+		<#if b0131List??>
+			ZB04 AS zb04,
+		</#if> 
+		A02_FUNCTION_NODE_R a02functionnoder
+		<#-- b01有参数  -->
+		LEFT JOIN b01 as b01 on b01.b00 = a02functionnoder.A0201B	
+		LEFT JOIN B01_UNIT_LIBRARY_RELA AS b01UnitLibraryReal on b01UnitLibraryReal.b00 = b01.b00
+		LEFT JOIN a01 as a01 on a01.a0000 = a02functionnoder.a0000
+		LEFT JOIN a01_function as a01Function on a01.a0000 = a01Function.a0000
+		LEFT JOIN A01_LIBRARY_RELA as a01LibraryRela on a01.a0000 = a01LibraryRela.a0000
+		<#--剪切库-->
+		<#if cutId??>
+			LEFT JOIN QUERY_CUT_DETAIL as QUERY_CUT_DETAIL on QUERY_CUT_DETAIL.CADRES_ID = a02functionnoder.A0000	
+		</#if>
+		<#--经历查询-->
+		<#if experience??>
+			LEFT JOIN A16 as A16 on A16.a0000 =  a02functionnoder.A0000 
+			LEFT JOIN A09 as A09 on A09.a0000 =  a02functionnoder.A0000 
+			LEFT JOIN A08 as A08 on A08.a0000 =  a02functionnoder.A0000		
+		</#if>
+		<#--简历-->
+		<#if oriA1701List??>
+			LEFT JOIN A17 as a17 on a17.a0000 =  a02functionnoder.A0000 
+		</#if>
+		<#-- a02有参数  -->
+		LEFT JOIN A02 as a02 on a02functionnoder.A0200 = a02.A0200 
+		<#-- a05有参数 -->
+		<#if a0504?? || a0221List??>
+			LEFT JOIN A05 as a05 on a05.a0000 =  a02functionnoder.A0000
+		</#if>
+		<#-- a06有参数  -->
+		<#if a0614List??>
+			LEFT JOIN A06 as a06 on a01.a0000 = a06.a0000
+		</#if>
+		<#-- a08有参数  -->
+		<#if a0801b1List?? || a08371?? || a0801b2List?? || a08372?? || a0827List??>
+			LEFT JOIN A08 as a08 on a01.a0000 = a08.a0000
+		</#if>
+		<#-- a09有参数  -->
+		<#if a0901bList?? || a0901bDutyList??>
+			LEFT JOIN A09 as a09 on a01.a0000 = a09.a0000
+		</#if>
+		<#-- a11有参数  -->
+		<#if a1114b??  || a1114a?? || a1131List?? || a1131a?? || a1107Start?? || a1107End?? || egp1171Min?? || egp1171Max?? || egxa1105List?? || a1104List?? || trainingStateList??>
+			INNER JOIN A11 as a11 on a01.a0000 = a11.a0000
+		</#if>
+		LEFT JOIN DEPARTMENT_A01_RELA  as departmenta01relas on a01.a0000 = departmenta01relas.a0000
+		<#-- 最高在职学历   -->
+		<#if a0801b1List??>
+		LEFT JOIN A08 as a08_1 on a01.a0000 = a08_1.a0000
+		INNER JOIN a0801b1ZB64 ON a0801b1ZB64.code = a08_1.a0801b
+		INNER JOIN (
+			SELECT a08Temp.A0000, MIN(a08Temp.a0801b) AS topEducate1
+			FROM A08 AS a08Temp,ZB64 AS zb64Temp 
+			WHERE 
+				a08Temp.a0801b = zb64Temp.code 
+				AND a08Temp.A0837 = '2'
+				GROUP BY a08Temp.A0000
+			) AS a01TopEducate1
+		ON a01TopEducate1.A0000 = a01.A0000
+		AND a01TopEducate1.topEducate1 = a08_1.a0801b
+		</#if>
+		<#-- 最高全日制学历   -->
+		<#if a0801b2List??>
+		LEFT JOIN A08 as a08_2 on a01.a0000 = a08_2.a0000
+		INNER JOIN a0801b2ZB64 ON a0801b2ZB64.code = a08_2.a0801b
+		INNER JOIN (
+			SELECT a08Temp.A0000, MIN(a08Temp.a0801b) AS topEducate2
+			FROM A08 AS a08Temp,ZB64 AS zb64Temp 
+			WHERE 
+				a08Temp.a0801b = zb64Temp.code 
+				AND a08Temp.A0837 = '1'
+				GROUP BY a08Temp.A0000
+			) AS a01TopEducate2
+		ON a01TopEducate2.A0000 = a01.A0000
+		AND a01TopEducate2.topEducate2 = a08_2.a0801b
+		</#if>
+		
+		<#-- 最高学历   -->
+		<#if a0801b3List??>
+		LEFT JOIN A08 as a08_3 on a01.a0000 = a08_3.a0000
+		INNER JOIN a0801b3ZB64 ON a0801b3ZB64.code = a08_3.a0801b
+		INNER JOIN (
+			SELECT a08Temp.A0000, MIN(a08Temp.a0801b) AS topEducate3
+			FROM A08 AS a08Temp,ZB64 AS zb64Temp 
+			WHERE 
+				a08Temp.a0801b = zb64Temp.code 
+				GROUP BY a08Temp.A0000
+			) AS a01TopEducate3
+		ON a01TopEducate3.A0000 = a01.A0000
+		AND a01TopEducate3.topEducate3 = a08_3.a0801b
+		</#if>
+		
+		<#-- 最高全日制学位  -->
+		<#if a0901bList??>
+		LEFT JOIN A09 as a09_1 on a01.a0000 = a09_1.a0000
+		INNER JOIN a0901bGB6864 ON a0901bGB6864.code = a09_1.a0901b
+		INNER JOIN (
+			SELECT
+				a0901bTemp.A0000,
+				MIN (a0901bTemp.a0901b) AS topDegree1
+			FROM
+				A09 AS a0901bTemp,
+				GB6864 AS gb6864Temp
+			WHERE
+				a0901bTemp.a0901b = gb6864Temp.code
+			AND a0901bTemp.egp0902 = '1'
+			GROUP BY
+				a0901bTemp.A0000
+		) AS a01TopDegree1 ON a01TopDegree1.A0000 = a01.A0000
+		AND a01TopDegree1.topDegree1 = a09_1.a0901b
+		</#if>
+		<#-- 最高在职学位  -->
+		<#if a0901bDutyList??>
+		LEFT JOIN A09 as a09_2 on a01.a0000 = a09_2.a0000
+		INNER JOIN a0901bDutyGB6864 ON a0901bDutyGB6864.code = a09_2.a0901b
+		INNER JOIN (
+			SELECT
+				a0901bTemp.A0000,
+				MIN (a0901bTemp.a0901b) AS topDegree2
+			FROM
+				A09 AS a0901bTemp,
+				GB6864 AS gb6864Temp
+			WHERE
+				a0901bTemp.a0901b = gb6864Temp.code
+			AND a0901bTemp.egp0902 = '2'
+			GROUP BY
+				a0901bTemp.A0000
+		) AS a01TopDegree2 ON a01TopDegree2.A0000 = a01.A0000
+		AND a01TopDegree2.topDegree2 = a09_2.a0901b
+		</#if>
+		<#-- 最高学位  -->
+		<#if a0901b3List??>
+		LEFT JOIN A09 as a09_3 on a01.a0000 = a09_3.a0000
+		INNER JOIN a0901b3GB6864 ON a0901b3GB6864.code = a09_3.a0901b
+		INNER JOIN (
+			SELECT
+				a0901bTemp.A0000,
+				MIN (a0901bTemp.a0901b) AS topDegree3
+			FROM
+				A09 AS a0901bTemp,
+				GB6864 AS gb6864Temp
+			WHERE
+				a0901bTemp.a0901b = gb6864Temp.code
+			GROUP BY
+				a0901bTemp.A0000
+		) AS a01TopDegree3 ON a01TopDegree3.A0000 = a01.A0000
+		AND a01TopDegree3.topDegree3 = a09_3.a0901b
+		</#if>
+		<#-- 最高学历专业类别  -->
+		<#if a0827List??>
+			INNER JOIN tempGB16835 on tempGB16835.code = a08.a0827
+			INNER JOIN (
+				SELECT
+					a0827Temp.A0000,
+					MIN (a0827Temp.a0801b) AS topDegreeType
+				FROM
+					A08 AS a0827Temp,
+					GB16835 AS gb16835Temp
+				WHERE
+					a0827Temp.A0827 = gb16835Temp.code
+				
+				GROUP BY
+					a0827Temp.A0000
+			) AS a01TopDegreeType ON a01TopDegreeType.A0000 = a01.A0000 and a01TopDegreeType.topDegreeType = a08.a0801b
+		</#if>
+		WHERE 1 = 1
+		
+		<#-- 人员管理状态   -->
+		<#if egXa0109List??>
+			<#--  人员管理状态  -->
+			AND (
+				<#-- 虚单位 人员 /人员管理状态-->
+				(	a02functionnoder.a0200 is null 
+					<#if libraryId??>
+					 	AND b01UnitLibraryReal.UNIT_LIBRARY_ID = '${libraryId}'
+					 </#if>
+					<#if egXa0109List??>
+						AND (
+						<#list egXa0109List as egXa0109>
+							<#if egXa0109_has_next>
+								a01.EG_XA0109 = ${egXa0109} OR
+							<#else>
+								a01.EG_XA0109 = ${egXa0109}
+							</#if>
+						</#list>
+						) 
+					</#if>
+				)
+				
+				or
+				(
+					<#-- 其他 -->
+					<#if egXa0109List??>
+						<#list egXa0109List as egXa0109>
+							<#-- 现职: 查询需要包含有"非不在任"职务 -->
+							<#if egXa0109 == '1'>
+								(
+									 a01.EG_XA0109 = ${egXa0109}
+									 AND a02.a0255 <> '0'
+									 <#if libraryId??>
+									 	AND b01UnitLibraryReal.UNIT_LIBRARY_ID = '${libraryId}'
+									 </#if> 
+								)
+								<#else>
+								(
+									 a01.EG_XA0109 = ${egXa0109}
+									 <#if libraryId??>
+									 	AND b01UnitLibraryReal.UNIT_LIBRARY_ID = '${libraryId}'
+									 </#if> 
+								)
+							</#if>
+							
+							<#if egXa0109_has_next>
+									OR
+								<#else>
+							</#if>
+						</#list>
+					</#if>
+				)
+			)
+			
+			<#else>
+			
+			<#-- 任现职级满x年（年份）默认查询非不在任  -->
+			<#if a0504??>
+				<#else>
+				AND a02.a0255 <> '0'
+			</#if>
+		</#if>
+		
+		<#-- 任现职务满x年(年份)  -->
+		<#if a0237Year??>
+			AND a02.a0255 <> '0'
+		</#if>
+		
+		<#-- 姓名 -->
+		<#if cadreNameArr??>
+	        AND (
+	         	a01.a0101 in (
+	            <#list cadreNameArr as cadreNameList>
+				    <#if cadreNameList_has_next>
+				    	'${cadreNameList}',
+				    <#else>
+				        '${cadreNameList}'
+				    </#if>
+			    </#list>
+			    )  or  a01.a0102 in (
+			    <#list cadreNameArr as cadreSpellName>
+			    	<#if cadreSpellName_has_next>
+				    	'${cadreSpellName}',
+				    <#else>
+				        '${cadreSpellName}'
+				    </#if>
+			    </#list>
+			    ) 
+			)
+		</#if>
+		<#if cadreName??>
+			AND (
+				a01.a0101 like '%${cadreName}%'
+				or a01.a0102 like '%${cadreName}%'
+		    )
+		</#if>
+		<#--剪切库-->
+		<#if cutId??>
+			AND QUERY_CUT_DETAIL.CADRES_ID IN (SELECT CADRES_ID FROM QUERY_CUT_DETAIL WHERE QUERY_CUT_ID = '${cutId}')
+		</#if>
+		<#--经历查询-->
+		<#if experience??>
+			AND (A16.a1607 like '%${experience}%' OR 
+				 A16.a1621 like '%${experience}%' OR 
+				 A16.a1623 like '%${experience}%' OR
+				 A09.a0907 like '%${experience}%' OR
+				 A08.a0814 like '%${experience}%' OR
+				 A08.a0824 like '%${experience}%'
+			) 
+			
+		</#if>
+		<#--简历-->
+		<#if oriA1701List??>
+			AND (
+			<#list oriA1701List as oriA1701>
+				<#if oriA1701_has_next>
+			     a17.ORI_A1701 LIKE '%${oriA1701}%' OR 
+				<#else>
+				 a17.ORI_A1701 LIKE '%${oriA1701}%'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 性别   -->
+		<#if a0104List??>
+			AND a0104 in (
+			<#list a0104List as a0104>
+				<#if a0104_has_next>
+			     '${a0104}',
+				<#else>
+					'${a0104}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 政治面貌   -->
+		<#if a0141List??>
+			AND a0141 in (
+			<#list a0141List as a0141>
+				<#if a0141_has_next>
+			     '${a0141}',
+				<#else>
+					'${a0141}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 籍贯  -->
+		<#if a0111b??>
+			AND a0111b = '${a0111b}'
+		</#if>
+		<#-- 出生地  -->
+		<#if a0114b??>
+			AND a0114b = '${a0114b}'
+		</#if>
+		<#-- 籍贯补充   -->
+		<#if egxa0111c??>
+			AND egxa0111c like '%${egxa0111c}%'
+		</#if>
+		<#-- 干部类别   -->
+		<#if egXa0110List??>
+			AND (
+			<#list egXa0110List as egXa0110>
+				<#if egXa0110_has_next>
+			    	a01.EG_XA0110 like '%${egXa0110}%' OR
+				<#else>
+					a01.EG_XA0110 like '%${egXa0110}%'
+				</#if>
+			</#list>
+			) 
+		</#if>
+		
+		<#-- 生日查询   -->
+		<#if year??>
+			AND DATENAME(yy, a01.a0107) = '${year}'
+		</#if>
+		<#if month??>
+			AND DATENAME(mm, a01.a0107) = '${month}'
+		</#if>
+		<#if monthAndDay??>
+			AND SUBSTRING(dbo.DateFmt4(a01.a0107), 6,5) = '${monthAndDay}'
+		</#if>
+		<#-- 到龄干部查询性别  -->
+		<#if isAgeA0104 == '1'>
+			AND a0104 LIKE '%${ageA0104}%'
+		</#if>
+		
+		<#-- 到龄干部查询  -->
+		<#if menAgeEndRange??>
+			AND ((
+				a0107 >= '${ageStartRange}'
+				AND a0107 <= '${menAgeEndRange}' 
+				AND a0104 = '1'
+			) OR
+			(
+				a0107 >= '${ageStartRange}'
+				AND a0107 <= '${womenAgeEndRange}' 
+				AND a0104 = '2'
+			)) 
+			<#elseif ageStartRange??>
+				<#if ageStartRange??>
+					AND a0107 >= '${ageStartRange}'
+				</#if>
+				<#if ageEndRange??>
+					AND a0107 <= '${ageEndRange}'
+				</#if>
+		</#if>
+		<#-- 入党时间  -->
+		<#if memberStartRange??>
+			AND a0144 >= '${memberStartRange}'
+		</#if>
+		<#if memberEndRange??>
+			AND a0144 <= '${memberEndRange}'
+		</#if>
+		<#-- 年龄   -->
+		<#if ageList??>
+			AND (
+			<#list ageList as age>
+				<#if age == '1'>
+					<#if age_has_next>
+				    	(a0107 >= '${down35}') OR
+					<#else>
+						(a0107 >= '${down35}')
+					</#if>
+				<#elseif age == '2'>
+					<#if age_has_next>
+				    	(a0107 >= '${down40}' AND a0107 <= '${up36}') OR
+					<#else>
+						(a0107 >= '${down40}' AND a0107 <= '${up36}')
+					</#if>
+				<#elseif age == '3'>
+					<#if age_has_next>
+				    	(a0107 >= '${down45}' AND a0107 <= '${up41}') OR
+					<#else>
+						(a0107 >= '${down45}' AND a0107 <= '${up41}')
+					</#if>
+				<#elseif age == '4'>
+					<#if age_has_next>
+				    	(a0107 >= '${down50}' AND a0107 <= '${up46}') OR
+					<#else>
+						(a0107 >= '${down50}' AND a0107 <= '${up46}')
+					</#if>
+				<#elseif age == '5'>
+					<#if age_has_next>
+				    	(a0107 >= '${down55}' AND a0107 <= '${up51}') OR
+					<#else>
+						(a0107 >= '${down55}' AND a0107 <= '${up51}')
+					</#if>
+				<#elseif age == '6'>
+					<#if age_has_next>
+				    	(a0107 >= '${down59}' AND a0107 <= '${up56}') OR
+					<#else>
+						(a0107 >= '${down59}' AND a0107 <= '${up56}')
+					</#if>
+				<#elseif age == '7'>
+					<#if age_has_next>
+				    	(a0107 >= '${down60}' AND a0107 <= '${up60}') OR
+					<#else>
+						(a0107 >= '${down60}' AND a0107 <= '${up60}')
+					</#if>
+				<#elseif age == '8'>
+					<#if age_has_next>
+				    	(a0107 < '${up60}') OR
+					<#else>
+						(a0107 < '${up60}')
+					</#if>
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 任意年龄(开始)   -->
+		<#if anyAgeStart??>
+			AND a0107 <= '${anyAgeStart}'
+		</#if>
+		<#-- 任意年龄(结束)  -->
+		<#if anyAgeEnd??>
+			AND a0107 >= '${anyAgeEnd}'
+		</#if>
+		<#-- 专业技术职务  -->
+		<#if a0614List??>
+			AND a0614 in (
+			<#list a0614List as a0614>
+				<#if a0614_has_next>
+			     '${a0614}',
+				<#else>
+					'${a0614}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 生日范围(开始)   -->
+		<#if birthStartTime??>
+			AND a0107 >= '${birthStartTime}'
+		</#if>
+		<#-- 生日范围(结束)  -->
+		<#if birthStopTime??>
+			AND a0107 <= '${birthStopTime}'
+		</#if>
+		<#-- 关键经历  -->
+		<#if keyExperienceList??>
+			AND (
+			<#list keyExperienceList as keyExperience>
+				<#if keyExperience_has_next>
+			     KEY_EXPERIENCE LIKE '%${keyExperience}%' OR 
+				<#else>
+				 KEY_EXPERIENCE LIKE '%${keyExperience}%'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 职务名称  -->
+		<#if a0215bList??>
+			AND a0215b in (
+			<#list a0215bList as a0215b>
+				<#if a0215b_has_next>
+			     '${a0215b}',
+				<#else>
+					'${a0215b}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 任职状态  -->
+		<#if a0255List??>
+			AND a0255 in (
+			<#list a0255List as a0255>
+				<#if a0255_has_next>
+			     '${a0255}',
+				<#else>
+					'${a0255}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 任职年度  -->
+		<#if annual??>
+			AND DATENAME(yy, a0243) = '${annual}'
+		</#if>
+		<#-- 职务类别  -->
+		<#if a0219List??>
+			AND a0219 in (
+			<#list a0219List as a0219>
+				<#if a0219_has_next>
+			     '${a0219}',
+				<#else>
+					'${a0219}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 领导职务  -->
+		<#if egxa0203List??>
+			AND EGXA0203 in (
+			<#list egxa0203List as egxa0203>
+				<#if egxa0203_has_next>
+			     '${egxa0203}',
+				<#else>
+					'${egxa0203}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		<#-- 现任人员职级  -->
+		<#if a0221List??>
+			AND a05.a0501b in (
+			<#list a0221List as a0221>
+				<#if a0221_has_next>
+				    '${a0221}',
+					<#else>
+						'${a0221}'
+				</#if>
+			</#list>
+			)
+			AND a05.ega0514 = '1'
+		</#if>
+		<#-- 现任人员职级 ||职务名称 -->
+		<#if a0215bList??>
+			AND a02.A0201B = a02functionnoder.A0201B
+		</#if> 
+		<#-- 任某级别满x年  -->
+		<#if a02212List??>
+			AND a02.a0221 in (
+			<#list a02212List as a02212>
+				<#if a02212_has_next>
+			     '${a02212}',
+				<#else>
+					'${a02212}'
+				</#if>
+			</#list>
+			)
+		</#if>
+		
+		<#-- 任现职级满x年(年份)  -->
+		<#if a0504??>
+			AND (
+				a05.a0504 <= '${a0504}' AND a05.ega0514 = '1'
+			)
+		</#if>
+
+		<#-- 任现级别满x年(年份)  -->
+		<#if a0215bYear??>
+			AND a02.a0215b <= '${a0215bYear}'
+		</#if>
+		
+		<#-- 任现职务满x年(年份)  -->
+		<#if a0237Year??>
+			AND a02.a0243 <= '${a0237Year}'
+		</#if>
+		<#-- 任职单位  -->
+		<#if a0201b??>
+			AND a02functionnoder.a0201b IN (${a0201b}) 
+			AND a02.a0200 IS NOT NULL
+		</#if>
+		<#-- 民族 -->
+		<#if a0117List??>
+			AND
+			<#if hans?? && minorities??>
+				a0117 IN ( SELECT CODE FROM GB3304 WHERE CODE >= '01' AND CODE <= '56')
+				<#elseif hans??>
+					a0117 = '01'
+				<#elseif minorities??>
+					a0117 IN ( SELECT CODE FROM GB3304 WHERE CODE >= '02' AND CODE <= '56')
+			</#if>
+		</#if>
+		<#-- 单位性质  -->
+		<#if b0131List??>
+			AND b01.b0131 = zb04.code
+			AND ( 
+				zb04.code in (
+					<#list b0131List as b0131>
+						<#if b0131_has_next>
+					     '${b0131}',
+						<#else>
+							'${b0131}'
+						</#if>
+					</#list>
+				) OR
+					zb04.sup_code in (
+					<#list b0131List as b0131>
+						<#if b0131_has_next>
+					     '${b0131}',
+						<#else>
+							'${b0131}'
+						</#if>
+					</#list>
+				)
+			)
+		</#if>
+		<#-- 库名称  -->
+		<#-- 
+			<#if libraryId??>
+				AND a01LibraryRela.UNIT_LIBRARY_ID = '${libraryId}'
+			</#if> 
+		-->
+		<#-- 系统归口  -->
+		<#if groupDmcod??>
+			AND b01UnitLibraryReal.dmcod IN (${groupDmcod})
+		</#if>
+		<#-- 参训状态 -->
+		<#if trainingStateList??>
+			AND NOT EXISTS(
+				SELECT 1
+				FROM A11 as a11Temp
+				WHERE a01.a0000 = a11Temp.a0000
+				<#-- 培训起始日期（开始） -->
+				<#if a1107Start??>
+					AND dbo.DateFmt4 (a11Temp.a1107) >= '${a1107Start}'
+				</#if>
+				<#-- 培训起始日期（截止） -->
+				<#if a1107End??>
+					AND dbo.DateFmt4 (a11Temp.a1111) <= '${a1107End}'
+				</#if>
+			)
+			<#-- 参训状态未勾选 -->
+			<#else>
+				<#-- 培训起始日期（开始） -->
+				<#if a1107Start??>
+					AND dbo.DateFmt4 (a11.a1107) >= '${a1107Start}'
+				</#if>
+				<#-- 培训起始日期（截止） -->
+				<#if a1107End??>
+					AND dbo.DateFmt4 (a11.a1111) <= '${a1107End}'
+				</#if>
+				<#-- 主办单位 -->
+				<#if a1114b??>
+					AND (a11.a1114b 
+					<#-- 主办单位排除标志 -->
+					<#if a1114bFlag??>
+						is null or a11.a1114b not
+					</#if>
+					in (${a1114b}))
+				</#if>
+				<#-- 主办单位补充  -->
+				<#if a1114a??>
+					AND (a11.a1114a 
+					<#-- 主办单位补充排除标志 -->
+					<#if a1114aFlag??>
+						is null or a11.a1114a not
+					</#if>
+					like '%${a1114a}%')
+				</#if>
+				<#-- 班次名称 -->
+				<#if a1131List??>
+					AND (a11.a1131 
+					<#-- 主办单位排除标志 -->
+					<#if a1131Flag??>
+						is null or a11.a1131 not
+					</#if>
+					in (
+					<#list a1131List as a1131>
+						<#if a1131_has_next>
+					     '${a1131}',
+						<#else>
+							'${a1131}'
+						</#if>
+					</#list>
+					))
+				</#if>
+				<#-- 班次名称补充 -->
+				<#if a1131a??>
+					AND (a11.a1131a 
+					<#-- 主办单位补充排除标志 -->
+					<#if a1131aFlag??>
+						is null or a11.a1131a not
+					</#if>
+					like '%${a1131a}%')
+				</#if>
+				<#-- 培训学时(最少) -->
+				<#if egp1171Min??>
+					AND a11.egp1171 >= ${egp1171Min}
+				</#if>
+				<#-- 培训学时(最多) -->
+				<#if egp1171Max??>
+					AND a11.egp1171 <= ${egp1171Max}
+				</#if>
+				<#-- 调训级别 -->
+				<#if egxa1105List??>
+					AND a11.egxa1105 
+					in (
+					<#list egxa1105List as egxa1105>
+						<#if egxa1105_has_next>
+					     '${egxa1105}',
+						<#else>
+							'${egxa1105}'
+						</#if>
+					</#list>
+					)
+				</#if>
+				<#-- 培训离岗状态 -->
+				<#if a1104List??>
+					AND a11.a1104 
+					in (
+					<#list a1104List as a1104>
+						<#if a1104_has_next>
+					     '${a1104}',
+						<#else>
+							'${a1104}'
+						</#if>
+					</#list>
+					)
+				</#if>
+		</#if>
+		<#if libraryId??>
+			AND ( a01LibraryRela.UNIT_LIBRARY_ID = '${libraryId}' OR a01Function.TOP_Order = '01-0000009999-0000009999-0000009999-0000009999')
+		</#if>
+		AND del_flag = 0
+		<#-- 数据状态0：正常数据1：临时数据 -->
+		AND rec_Flag = 0
+	]]>
+	</sql-query>
+	
+</dynamic-hibernate-statement>

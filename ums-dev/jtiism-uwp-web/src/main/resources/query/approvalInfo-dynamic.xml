@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+"http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+
+
+
+	<!--  -->
+	<sql-query name="approval.AprList">
+	<![CDATA[
+	FROM CFG_UMS_ROLE_USER  roleUser
+		INNER JOIN ROLE_DEPT_RELA roleDept on roleDept.ROLE_ID = roleUser.ROLEID
+        INNER JOIN UNIT_INFO UNITINFO ON UNITINFO.b0120 = roleDept.DEPT_ID
+        INNER JOIN SHJT_ENT_INF entInf ON entInf.entInf023 = UNITINFO.b00
+		INNER JOIN SHJT_APR_INFO apr on apr.ENTINF000 = entInf.ENTINF000
+		WHERE entInf.ENTINF050=0 and roleUser.USERID =:userId
+		<#--  企业名称   -->
+		<#if type?? && type!="">
+			and apr.type='${type}'
+		</#if>
+		<#--  企业名称   -->
+		<#if entName?? && entName!="">
+			and entInf.ENTINF001 like '%${entName}%'
+		</#if>
+		<#--  呈报时间  -->
+		<#if reportTime?? && reportTime!="">
+			and to_days(apr.CREATETIME)=to_days('${reportTime}')
+		</#if>
+		<#--  状态  -->
+		<#if status?? && status!="" >
+			 and apr.status='${status}'
+		</#if>
+		 order by status asc,CREATETIME desc
+	]]>
+	</sql-query>
+
+
+	
+	<hql-query name="ggg">
+	<![CDATA[
+
+	]]>
+	</hql-query>
+	
+	
+
+
+</dynamic-hibernate-statement>

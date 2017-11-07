@@ -1,0 +1,59 @@
+.输入定义
+$no>cds.setCell(1)
+$year>cds.getDateBeforeYear(1).dateFormate("yyyy")
+$title>cds.setCell("年度税收企业名单")
+>>$title = $year + $title
+A1>cds.setCell($title)
+
+.单元格定义
+>>cds.copyARowWithStartTempRow(3)
+
+#企业数据
+$enterprise>cds.data()
+#企业id
+$enterpriseId>cds.getParam("$enterprise").get("ENTINF000")
+
+#序号
+A3>cds.setCell($no)
+>>$no= $no + 1
+
+#企业名称
+B3>cds.getParam("$enterprise").get("ENTINF001")
+
+#税收
+$entYosList>cds.sql("select sum(ENTYOS006) ENTYOS006 from SHJT_ENT_YOS where ENTINF000 = '${$enterpriseId}' and ENTYOS002 BETWEEN '${$year}-01-01' AND DATE_ADD('${$year}-01-01', INTERVAL 1 YEAR)")
+
+#税收合计
+C3>cds.getParam("$entYosList").index(0).get("ENTYOS006")
+
+#企业性质
+D3>cds.getParam("$enterprise").get("ENTINF019").codeName("ENTINF019")
+
+#企业类型
+E3>cds.getParam("$enterprise").get("ENTINF026").codeName("ENTINF026")
+
+#经营地址
+F3>cds.getParam("$enterprise").get("ENTINF006")
+
+#企业法人列表
+$entPerList>cds.sql("select ENTCTI001,ENTCTI002,ENTCTI009,ENTCTI011,ENTCTI012 from SHJT_ENT_CTI where ENTINF000 = '${$enterpriseId}' and ENTCTI003 = '1'")
+#法人
+$entPerFir>cds.getParam("$entPerList").index(0)
+#法人姓名
+G3>cds.getParam("$entPerFir").get("ENTCTI002")
+#法人固定电话
+H3>cds.getParam("$entPerFir").get("ENTCTI010")
+#法人手机号
+I3>cds.getParam("$entPerFir").get("ENTCTI009")
+#联系电话
+J3>cds.getParam("$enterprise").get("ENTINF051")
+#企业年度经营情况列表
+$entAosList>cds.sql("select ENTAOS017,ENTAOS018,ENTAOS019 from SHJT_ENT_AOS where ENTINF000 = '${$enterpriseId}'")
+#企业年度经营情况
+$entAos>cds.getParam("$entAosList").index(0)
+#增值税（万元）
+K3>cds.getParam("$entAos").get("ENTAOS017")
+#企业所得税（万元）
+L3>cds.getParam("$entAos").get("ENTAOS018")
+#个人所得税（万元）
+M3>cds.getParam("$entAos").get("ENTAOS019")

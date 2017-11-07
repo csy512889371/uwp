@@ -1,0 +1,274 @@
+*{
+    margin: 0px;
+    padding: 0px;
+	cursor:default;
+}
+html{
+	overflow-x:hidden;
+	overflow-y:hidden;
+	}
+body {
+    height: 100%;
+    width: 100%;
+	min-height:576px;
+	 min-width:1024px;
+	font-family:"微软雅黑";
+	color:#fff;
+	cursor:default;
+	background: #F1F3F5;
+	
+}
+h2{
+	color:#fff;
+	font-family:"微软雅黑";
+	}
+a,li{
+	list-style:none;
+	text-decoration:none;
+	cursor:default;
+	}
+
+ .wrap{
+	 width:100%;
+	 height:100%;
+	 min-height:576px;
+	 min-width:1024px;
+	 }
+
+/********************************************************************************************
+ *                                        顶部内容                                           *
+ ********************************************************************************************/
+.top_container{
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:999;
+	width:100%;
+	height:60px;
+	background: #099;
+	margin:0;
+	padding:0;
+    box-shadow:0 1px 2px rgba(0,0,0,0.2) ;
+	}
+.top_container h3{
+	color:#0C9;
+	font-size:18px;
+	line-height:60px;
+	letter-spacing:1.5px;
+	margin-left:20px;;
+	padding-left:60px;
+	font-family:"微软雅黑";
+	font-weight:normal;
+	display: inline-block;
+	}
+#top_container{
+	background: #099;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	text-align:center;
+	}
+.top_container span{
+	float:left;
+	width:350px;
+	margin-left:1%;
+	padding-left:26px;
+	font-weight:bold;
+	color:#fff;
+	font-size:24px;
+	line-height:60px;
+	height:60px;
+	letter-spacing:1.5px;
+	font-family:"微软雅黑";
+	display:block;
+	background:url(../../img/login/logo.png) no-repeat 0% 59%;
+	}
+.top_link{
+	float:right;
+	line-height:60px;
+	background:url(../../img/login/esc.png) no-repeat 0 50%;
+	display:inline-block;
+	height:60px;
+	color:#ccebeb;
+	margin-right:20px;
+	font-size:14px;
+	}
+.top_link:hover{
+	color:#02fedc;
+	}
+.esc{
+	background:url(../../img/login/esc.png) no-repeat 0 50%;
+	padding-left:20px;
+	}
+.zbsm{
+	background:url(../../img/login/zbsm.png) no-repeat 0 53%;
+	padding-left:20px;
+	}
+.esc:hover{
+	background:url(../../img/login/esc_hover.png) no-repeat 0 50%;
+	}
+.zbsm:hover{
+	background:url(../../img/login/zbsm_hover.png) no-repeat 0 53%;
+	}
+.backbtn,.next{
+	position:absolute;
+	top:15px;
+	right:25px;
+	text-align:center;
+	font-size:13px;
+	color:#fff;
+	line-height:30px;
+	padding:0 13px;
+	padding-left:30px;
+	border:1px solid #fff;
+	text-decoration:none;
+	font-family:"微软雅黑";
+	background:url(../../img/login/back.png) no-repeat 20% 50%;
+	}
+.next{
+	padding:0 13px !important;
+	background:none;
+	}
+.backbtn:hover{
+    border:1px solid #0C9;
+	color:#0C9;
+	background:url(../../img/login/back-hover.png) no-repeat 20% 50%;
+	}
+.next:hover{
+    border:1px solid #0C9;
+	color:#0C9;
+	}
+.top-menu-box{
+	position:absolute;
+	top:0px;
+	right:120px;
+	}
+.top-menu1,.top-menu{
+    height:30px;
+	display:inline-block;
+	text-align:center;
+	font-size:14px;
+	color:#fff;
+	line-height:30px;
+	padding:0 15px;
+	border:1px solid #fff;
+	text-decoration:none;
+	font-family:"微软雅黑";
+	}
+.top-menu1{
+	margin:15px 0 0 15px;
+	}
+.top-menu{
+	margin:10px 0 0 0px;
+	margin-left:-6px;
+	}
+.top-menu1:hover,.top-menu:hover{
+	background-color:#fff;
+	color:#2c4459;
+	}
+/*------------------------------------左侧导航------------------------------------*/
+.left-menu{
+	color:#000;
+	position:fixed;
+	top:60px;
+	background-color:#099;
+	height:100%;
+	text-align:center;
+	font-size:12px;
+	box-shadow:1px 0px 5px rgba(0,0,0,0.3);
+	z-index:10;
+	}
+.left-menu>ul b{
+	display:block;
+	height:2px;
+	background: url(../../img/login/divi.png) repeat-x;
+	}
+.left-menu>ul>li{
+	}
+.left-menu>ul>li p img{
+	margin-bottom:5px;
+	}
+.left-menu em{
+	display:inline-block;
+	width: 36px;
+    height: 30px;
+	vertical-align: middle;
+	}
+.li1 em{background:url(../../img/login/1024spdt.png) no-repeat 50% 0%;}
+.li2 em{background:url(../../img/login/1024spzx.png) no-repeat 50% 0%;}
+.li3 em{background:url(../../img/login/1024gjjx.png) no-repeat 50% 0%;}
+.li4 em{background:url(../../img/login/1024sftj.png) no-repeat 50% 0%;}
+.li5 em{background:url(../../img/login/1024sfgk.png) no-repeat 50% 0%;}
+.li6 em{background:url(../../img/login/1024ztfx_03.png) no-repeat 50% 0%;}
+.li7 em{background:url(../../img/login/1024ztfx.png) no-repeat 50% 0%;}
+.li8 em{background:url(../../img/login/1024zhss.png) no-repeat 50% 0%;}
+.left-menu a{
+	color:#fff;
+	display:block;
+	padding:15px 10px;
+	}
+.left-menu a:hover{
+	color:#089582;
+	}
+.hit em{background:url(../../img/login/1024spdt-hover.png) no-repeat 50% 0%;}
+.hit{background-color:#c9ebe6;}
+.hit a{color:#089582;}
+.li1:hover em{background:url(../../img/login/1024spdt-hover.png) no-repeat 50% 0%;}
+.li2:hover em{background:url(../../img/login/1024spzx-hover.png) no-repeat 50% 0%;}
+.li3:hover em{background:url(../../img/login/1024gjjx-hover.png) no-repeat 50% 0%;}
+.li4:hover em{background:url(../../img/login/1024sftj-hover.png) no-repeat 50% 0%;}
+.li5:hover em{background:url(../../img/login/1024sfgk-hover.png) no-repeat 50% 0%;}
+.li6:hover em{background:url(../../img/login/1024ztfx_03-hover.png) no-repeat 50% 0%;}
+.li7:hover em{background:url(../../img/login/1024ztfx-hove.png) no-repeat 50% 0%;}
+.li8:hover em{background:url(../../img/login/1024zhss-hover.png) no-repeat 50% 0%;}
+.left-menu>ul>li:hover {
+	background-color:#7ed7cb;
+	}
+.li6:hover .link6{
+	color:#089582;
+	}
+.left-ul2{
+	position:fixed;
+	top:60px;
+	left:68px;
+	color:#000 !important;
+	background-color:#7ed7cb !important;
+	padding-top:0px;
+	height:100%;
+	border-right:solid 1px #099;
+	}
+.left-ul2 li{
+	padding:0 15px !important;
+	text-align:left;
+	}
+.left-ul2 li a{
+	color:#000 !important;
+	font-size:14px;
+	}	
+.left-ul2 li img{
+	vertical-align:middle;
+	margin-right:5px;
+	}
+
+.left-ul2 li:hover{
+	background-color:#3aa99a;
+	}
+.left-ul2{
+	
+	display:none;
+	opacity:0;
+	-webkit-transition: opacity 1.25s ease .1s;
+	-moz-transition: opacity 1.25s ease .1s;
+	-o-transition: opacity 1.25s ease .1s;
+	-ms-transition: opacity 1.25s ease .1s;
+	transition: opacity 1.25s ease .1s;
+	}
+.left-menu>ul>li:hover .left-ul2{
+	display:block;
+	opacity:1;
+	}
+.left-menu>ul b {
+display: block;
+height: 2px;
+background: url(../../img/login/divi.png) repeat-x;	

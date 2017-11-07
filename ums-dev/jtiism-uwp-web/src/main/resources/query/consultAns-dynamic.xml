@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dynamic-hibernate-statement PUBLIC "-//cmis/HOP Hibernate Dynamic Statement DTD 1.0//EN"
+        "http://www.jtiism.com/dtd/dynamic-hibernate-statement-1.0.dtd">
+<dynamic-hibernate-statement>
+    <sql-query name="consultAns.queryList">
+        <![CDATA[
+	FROM SHJT_CST_ANS  WHERE 1=1
+        <#--  cstinf000   -->
+		<#if cstinf000?? && cstinf000!="">
+			and cstinf000 in(
+			<#list cstinf000?split(",") as cstinf000s>
+				'${cstinf000s}'<#if cstinf000s_has_next>,</#if>
+			</#list>)
+		</#if>
+	]]>
+    </sql-query>
+</dynamic-hibernate-statement>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+
+
+	<diskStore path="java.io.tmpdir" />
+
+	<cache name="setting" maxElementsInMemory="800" eternal="true"
+		overflowToDisk="true" />
+		
+	<cache name="logConfig" maxElementsInMemory="100" eternal="true"
+		overflowToDisk="true" />
+	<cache name="coder" maxElementsInMemory="100" eternal="true"
+		overflowToDisk="true" />
+	<cache name="fieldInfo" maxElementsInMemory="100" eternal="true"
+		overflowToDisk="true" />
+	<cache name="dataDict" maxElementsInMemory="800" eternal="true"
+		overflowToDisk="true" />
+		
+	<cache name="authorization" maxElementsInMemory="100"
+		timeToLiveSeconds="3600" eternal="false" overflowToDisk="false" />
+
+	<!-- 登录令牌 -->
+	<cache name="loginTickets" maxElementsInMemory="500"
+		timeToLiveSeconds="3600" eternal="false" overflowToDisk="true"></cache>
+
+
+	<cache name="template" maxElementsInMemory="100" eternal="true" overflowToDisk="true" />
+
+
+</ehcache>
