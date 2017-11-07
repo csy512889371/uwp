@@ -9,3 +9,19 @@
 > * hibernate 4.3.11.Final
 > * spring 4.3.9.RELEASE
 > * redis
+
+## 帐号
+admin/12345678
+
+## 页面
+![image](https://github.com/csy512889371/uwp/blob/master/img/1.png)
+
+![image](https://github.com/csy512889371/uwp/blob/master/img/2.png)
+
+![image](https://github.com/csy512889371/uwp/blob/master/img/3.png)
+
+![image](https://github.com/csy512889371/uwp/blob/master/img/4.png)
+
+![image](https://github.com/csy512889371/uwp/blob/master/img/5.png)
+
+![image](https://github.com/csy512889371/uwp/blob/master/img/6.png)
